@@ -1,0 +1,36 @@
+{
+  "name": "prof-data-analyst",
+  "version": "3.2.2",
+  "description": "Professional Data Analyst + Analytics Engineer plugin — 9 routable modes (Frame/Model/Query/Process/Insight/Automation/Report/Review/Fix), engine-agnostic SQL, 14 stdlib scripts, 4 mandatory rules + Proactive Suggestion at Mode Exit, 14 method spec files (causal + validation families), planning protocol (TH1/TH2), metric framework selection (NSM/OMTM/Growth Loop/HEART), 4 data modeling patterns (Kimball/dbt/Medallion/DuckDB), 6-section governance, 5 orchestration patterns (Airflow/dbt+GHA/cron/GitHub Actions/Google Apps Script), storytelling, suggestion protocol (8 extension categories). 1-stop-shop end-to-end DA + AE harness with proactive capability discovery.",
+  "author": {
+    "name": "Loc Tu",
+    "email": "loc.tu@mservice.com.vn"
+  },
+  "license": "MIT",
+  "keywords": [
+    "data-analyst",
+    "data-analysis",
+    "analytics-engineering",
+    "sql",
+    "bigquery",
+    "duckdb",
+    "dbt",
+    "airflow",
+    "kimball",
+    "medallion",
+    "causal-inference",
+    "did",
+    "bootstrap",
+    "data-governance",
+    "metric-framework",
+    "planning",
+    "stakeholder-report",
+    "storytelling",
+    "apps-script",
+    "google-sheets",
+    "proactive-suggestion",
+    "capability-discovery",
+    "rigor",
+    "validation"
+  ]
+}
