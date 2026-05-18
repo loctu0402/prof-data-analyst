@@ -6,11 +6,11 @@
 
 Plugins (and skills) have a capability discovery problem. Users invoke 1-2 known commands repeatedly and never discover the other 80% of capability — because reading the overview doc isn't how humans work. They learn by doing, then ask "what else can this do?" only after they've gotten value.
 
-**Field example (the cost of passive discovery):**
-- User runs `/da-report "TTT revenue + cashin flow"` → gets a report
-- User doesn't know plugin can ALSO: pull event-tracking from MCP momo-data + schedule daily refresh via Apps Script + alert when KPI breaches threshold
-- User ships the static report → loses 80% of potential value
-- 2 weeks later: "Oh wait, plugin can do that?" — too late, project archived
+**Example (the cost of passive discovery):**
+- User runs `/da-report "weekly revenue + cashin flow"` → gets a report
+- User doesn't know the plugin can ALSO: pull event-tracking from an org MCP + schedule daily refresh via Apps Script + alert when a KPI breaches threshold
+- User ships the static report → loses most of the available value
+- 2 weeks later: "Oh wait, the plugin can do that?" — too late, project archived
 
 **Solution (this protocol):** at every mode exit, agent runs 3-step Suggestion Loop:
 1. **Detect context** — what mode + what data + what output + what MCPs available
@@ -30,7 +30,7 @@ Agent at mode exit collects 4 signals (lightweight; no extra tool calls):
 | Signal | Source | Example value |
 |--------|--------|---------------|
 | **Current mode** | The command invoked | `report`, `process`, `insight`, etc. |
-| **Data source(s)** | Files / tables / MCPs referenced in this session | `mart_ttt_daily_user_record`, `events.csv`, `MCP momo-data` |
+| **Data source(s)** | Files / tables / MCPs referenced in this session | `<daily_user_mart>`, `events.csv`, `<org-data MCP>` |
 | **Output format(s)** | Files produced | `notebook.ipynb`, `report.html`, `model.pkl`, `dashboard.json` |
 | **Available MCPs / tools** | Listed in session context | `momo-data`, `mimir`, `google-drive`, `momo-data-portal` |
 | **Stakeholder hints** | Explicit mentions in user prompt | "non-technical manager", "C-level", "team review" |
@@ -103,7 +103,7 @@ When agent doesn't have enough signal, fall back to mode-specific top-3:
 | `automate` | (1) Add fail-alert if not present / (2) Document SLA + freshness threshold / (3) Add cross-DAG sensor if dependency |
 | `report` | (1) Schedule auto-refresh (cron/Apps Script/Airflow) / (2) Add non-technical 1-pager version / (3) Wire alert when KPI breach |
 | `review` | (1) Run heavier tier (A → B) if HIGH count too high / (2) Spot-check method maturity / (3) Document outline check as template |
-| `fix` | (1) Stabilize-to-template if recurring / (2) Backfill validation after fix / (3) Document anti-pattern in lt-memory |
+| `fix` | (1) Stabilize-to-template if recurring / (2) Backfill validation after fix / (3) Document anti-pattern in your long-term memory |
 
 These are DEFAULTS. Context-detection (Step 1-2) overrides defaults when signals point elsewhere.
 

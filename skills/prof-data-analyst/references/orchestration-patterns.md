@@ -31,7 +31,7 @@ Hybrid common: Airflow for ingest + dbt for transform + cron for tiny one-offs. 
 - Team already runs Airflow (don't introduce a 2nd orchestrator)
 - Production scale (daily 100+ tasks)
 
-### Anatomy (TTT-style, plain DAG)
+### Anatomy (plain DAG)
 
 ```python
 from airflow import DAG
@@ -624,7 +624,7 @@ apps_script = build_apps_script()  # Apps Script API client
 
 # Programmatically create Apps Script project bound to a Sheet
 script_project = apps_script.projects().create(body={
-    'title': 'TTT Dashboard Auto',
+    'title': 'Dashboard Auto',
     'parentId': sheet_id  # ← binds to this Sheet
 }).execute()
 

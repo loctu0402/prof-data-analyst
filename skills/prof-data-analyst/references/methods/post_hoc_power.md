@@ -103,7 +103,7 @@ else:
 
 ## Worked example — null result on screen-views outcome
 
-Setup: in the same TTT campaign analysis, the screen-views outcome had a DiD p-value of 0.07 → "not significant." Stakeholder asks: does this mean no effect, or weak power?
+Setup: in the same campaign analysis (from `methods/did.md`), the screen-views outcome had a DiD p-value of 0.07 → "not significant." Stakeholder asks: does this mean no effect, or weak power?
 
 Setup:
 - n_treated = 50,000; n_control = 50,000

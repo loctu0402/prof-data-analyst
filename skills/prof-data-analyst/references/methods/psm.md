@@ -111,21 +111,21 @@ psm.effect_size_plot()  # SDM per covariate
 print(psm.effect_size())
 ```
 
-## Worked example — power-user TTT conversion
+## Worked example — feature opt-in vs eventual usage
 
-Setup: among MoMo users who have NEVER used TTT, did a subset who voluntarily clicked "Learn more" (treated) eventually deposit more once they did sign up, vs comparable users who didn't click?
+Setup: among users who have NEVER used a focal feature, did a subset who voluntarily clicked "Learn more" (treated) eventually deposit more once they did sign up, vs comparable users who didn't click?
 
 Setup:
 - Treated: ~50k users who clicked "Learn more" in Q1 2026
 - Control: 2M users who didn't click
-- Covariates: age, tenure on MoMo, average wallet balance, transaction frequency, geo
-- Outcome: TTT AUM at month-6 post-signup
+- Covariates: age, platform tenure, average wallet balance, transaction frequency, geo
+- Outcome: focal AUM at month-6 post-signup
 
 Result (illustrative):
 - Pre-match SDM: 0.65 on tenure, 0.42 on transaction frequency (treated very different)
 - Post-match (NN-1, caliper 0.05): SDM < 0.05 on all covariates ✓
 - Common support: 96% of treated matched ✓
-- ATT: +3.2M VND in TTT AUM at month-6 (95% CI: +2.8M to +3.6M)
+- ATT: +3.2M units in focal AUM at month-6 (95% CI: +2.8M to +3.6M)
 - Rosenbaum bound: Γ = 1.4 (effect becomes non-significant if unobserved confounder makes treated 1.4× more likely to be treated) — modest
 
 Verdict: clicking "Learn more" associated with +3.2M AUM at month-6. INTERPRET CAREFULLY: PSM identifies ATT under selection-on-observables; if motivated users would have deposited more regardless (motivation unobserved), Γ = 1.4 says "modest unobserved confounder could explain the effect." Report as "associated with" not "caused by" unless Γ ≥ 2.

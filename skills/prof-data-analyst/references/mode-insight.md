@@ -127,7 +127,7 @@ Run AFTER every analysis, BEFORE finalizing conclusion. Self-check audits:
 2. **Proxy audit**: "Am I using a proxy as direct measure? (e.g., Brent oil ≠ Vietnam retail fuel — Price Stabilization Fund decouples)"
 3. **Sample size audit**: "Is n sufficient? Would conclusion change with more data? → suggest user extend range"
 4. **Confounding audit**: "Could a third variable explain both? (e.g., global risk sentiment drives BOTH oil AND withdrawals)"
-5. **Direction audit**: "Am I stating something obvious by definition? (e.g., 'Tier 3 rút nhiều' — they're classified as 80%+ cashout)"
+5. **Direction audit**: "Am I stating something obvious by definition? (e.g., 'the heavy-withdrawal tier withdraws a lot' — they're classified that way by definition)"
 6. **Numerical consistency audit**: cross-card reconciliation; back-derive headlines from raw
 
 If limitations found → add qualification notes IN the report, don't hide them.
@@ -136,7 +136,7 @@ Use `deep-research` skill to validate causal mechanisms with academic references
 
 ## Phase 6 — Anti-Bias Protocol (CRITICAL)
 
-- **Never one-sided**: for every negative finding, actively search for counter-argument or recovery signal. "Tier 3 drain −1,649B BUT Tier 1 still net positive +1,445B = recovery foundation."
+- **Never one-sided**: for every negative finding, actively search for counter-argument or recovery signal. "Heavy-tier drain −1,649B BUT lighter tier still net positive +1,445B = recovery foundation."
 - **Challenge user framing**: if user's hypothesis leads to bias, present data objectively. If data contradicts hypothesis, SAY SO clearly — don't force-fit evidence.
 - **Multi-dimensional**: every metric examined from ≥2 angles. "CO > 100M users +22.5% (bad) BUT total T1 users grew 7.8M → 9.1M (good) — product is GROWING overall despite drain."
 - **Structural vs cyclical**: always distinguish: "Is this structural (scheme design flaw) or cyclical (market downturn reversing)?" → different recommendations for each.
@@ -152,7 +152,7 @@ Fact → Mechanism → Behavioral Change → Product Impact → Evidence
 
 WRONG: "Oil correlation r = −0.751"
 
-RIGHT: "Oil price +31% in March (FACT) → transport + food prices ↑ (MECHANISM) → households reallocate cash toward expenses (BEHAVIORAL CHANGE) → withdrawal from MoMo TTT for daily payments (PRODUCT IMPACT) → Payment Cashout +13.2% same period, mart_ttt_daily section 4.1 (EVIDENCE)"
+RIGHT: "Oil price +31% in March (FACT) → transport + food prices ↑ (MECHANISM) → households reallocate cash toward expenses (BEHAVIORAL CHANGE) → withdrawal from a savings product for daily payments (PRODUCT IMPACT) → Payment Cashout +13.2% same period, daily mart section 4.1 (EVIDENCE)"
 
 If any stage missing, finding is incomplete.
 

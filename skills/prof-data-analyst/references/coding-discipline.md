@@ -67,7 +67,7 @@ Default: **Haiku**. Escalate via `Agent(model=...)` with explicit model param.
 Rules:
 - Self-classify task BEFORE executing
 - Spawn `Agent(model=...)` for reasoning subtasks — DO NOT switch session model
-- Advisory pattern: Sonnet → Opus on demand for hard reasoning (document your own advisory workflow in `<your-workspace>/lt-memory/rules/advisory-workflow.md` or equivalent)
+- Advisory pattern: Sonnet → Opus on demand for hard reasoning (document your own advisory workflow in your workspace's rules / memory directory)
 - For LLM-as-judge subagents: bake pos/neg examples + ban heuristic-script shortcut explicitly in prompt (subagents shortcut to 87% category default otherwise)
 
 ## Comments Policy

@@ -12,7 +12,7 @@ User's bug report: $ARGUMENTS
 Workflow:
 - Triage symptom via decision tree (HTML / data missing / silent fail / wrong numbers / drift / recurring)
 - HTML bug → CREATE `update_report_vN.py`, NEVER edit `generate_report.py`
-- Cache schema drift → check 2026+ revenue tier split, Túi+ legacy union, Xu→VND ratio change
+- Cache schema drift → check column-split-at-cutover, legacy-table UNION need, ratio-change-at-date branching
 - Numerical bug → cross-card reconciliation + back-derive headlines (call advisor if stuck)
 - Silent bugs → check state-machine neighbor inheritance, two-cache-files mismatch, OLS anomaly window
 - Patch ceiling: ≥3 distinct bugs same artifact → STOP patching, surface rebuild option

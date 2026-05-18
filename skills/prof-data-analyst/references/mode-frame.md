@@ -13,7 +13,7 @@ The 7 original modes (query / process / insight / automate / report / review / f
 ## When to invoke
 
 - **New project kickoff** (no prior planning doc exists)
-- **Stakeholder ask is vague** ("phân tích Tier 3", "build dashboard cho team")
+- **Stakeholder ask is vague** ("phân tích segment X", "build dashboard cho team")
 - **Scope is ambiguous** (one-off vs recurring? exploratory vs hypothesis-driven?)
 - **No prior data plan** (need to verify schema / discover domain / design new model)
 - **Pivot mid-project** (original frame broke; need re-plan)

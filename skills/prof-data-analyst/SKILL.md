@@ -29,12 +29,12 @@ Reason: AI inline arithmetic is unreliable and unauditable. Scripts are reproduc
 SKILL.md is lean. Mode-specific details live in `references/mode-*.md`, loaded only when the matching mode triggers. Scripts are NEVER loaded into context — they're executed.
 
 ### Portable First, Niche Optional
-Mode-specific references treat company-specific tooling (MoMo Mimir, MoMo mart_ttt_*, MoMo CASA benchmarks) as **examples**, not requirements. The same workflow runs against any SQL engine, any BI stack, any notification channel.
+Mode-specific references treat any company-specific tooling, mart, or benchmark as **example**, not requirement. The same workflow runs against any SQL engine, any BI stack, any notification channel.
 
 ### Proactive Suggestion at Mode Exit (v3.2)
 At every mode exit, agent MUST run the 3-step Suggestion Loop: (1) detect context (mode + data + output + available MCPs + stakeholder hints), (2) map to 1-3 of the 8 extension categories (data source expansion / automation upgrade / quality validation stack / method upgrade / audience expansion / format expansion / downstream connection / MCP-tooling expansion), (3) propose with opt-in phrasing (specific + cite trigger + Why + effort estimate + explicit skip path).
 
-Reason: users can't discover full plugin capability by reading overview ("you don't know what you don't know"). Field test 2026-05-15 confirmed: user shipped static TTT report → missed event-tracking + auto-refresh + alert wiring options. Proactive suggestion at exit recovers ~80% of missed capability.
+Reason: users can't discover full plugin capability by reading overview ("you don't know what you don't know"). Proactive suggestion at exit recovers most of the missed capability — users see relevant options when they have working context to evaluate them.
 
 Full protocol + 3 worked examples: `references/suggestion-protocol.md`. Orchestrator (`agents/da-orchestrator.md`) runs this gate when `/da` was the entry; direct-mode invocations run the gate inline per mode reference.
 

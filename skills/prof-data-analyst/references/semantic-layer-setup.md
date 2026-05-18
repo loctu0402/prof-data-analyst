@@ -2,7 +2,7 @@
 
 When a project needs a semantic layer (so multiple consumers — dashboards, ad-hoc SQL users, AI agents, REST API — share one metric definition), follow this 6-phase recipe. The recipe is **engine-agnostic** — works with Cube.js, dbt-metrics, LookML, MetricFlow, or any custom-built metric layer. Concrete tool names below are illustrations; substitute your org's stack.
 
-For the MoMo Semantic Cube (Synmetrix + Cube.js) implementation specifically, see `references/momo-extensions.md` + the full Semantic Cube reference at `<workspace>/notes/loctu-pkm/1-notes/semantic-cube-reference.md`.
+For the MoMo Semantic Cube (Synmetrix + Cube.js) implementation specifically, see `references/momo-extensions.md`.
 
 ## When to use this recipe
 
@@ -226,7 +226,7 @@ For any engine: keep Phase 0 (discovery), Phase 1 (architecture), Phase 2 (templ
 
 - Schema discovery tiers (PRE-requisite to building semantic layer) → `references/schema-source-hierarchy.md`
 - MoMo-specific implementation (Synmetrix + Cube.js + momo-data MCP) → `references/momo-extensions.md`
-- Full Semantic Cube spec (MoMo) → `<workspace>/notes/loctu-pkm/1-notes/semantic-cube-reference.md`
+- MoMo Semantic Cube docs (public) → `https://semanticcube-doc.mservice.io/docs/intro`
 - Data modeling patterns (upstream of semantic layer) → `references/mode-model.md`
 - Governance (6-section framework) → `references/governance.md`
 

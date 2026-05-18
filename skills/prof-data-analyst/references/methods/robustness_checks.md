@@ -113,20 +113,20 @@ for label, spec in specs.items():
 pd.DataFrame(results).to_csv("output/robustness_table.csv", index=False)
 ```
 
-## Worked example — Tier 3 cashout intervention robustness
+## Worked example — campaign intervention robustness
 
-Continuing the DiD worked example from `methods/did.md`: headline = −18,500 VND per user (campaign reduced Tier 3 cashout).
+Continuing the DiD worked example from `methods/did.md`: headline = −18,500 units per user (campaign reduced the focal outcome on the targeted tier).
 
 Robustness specs:
 | Spec | Estimate | SE | p | Status |
 |------|----------|------|---|--------|
 | Headline (linear, full sample, all controls) | −18,500 | 2,900 | <0.001 | ✓ |
 | Log outcome (drop zeros) | −0.21 (log units) | 0.03 | <0.001 | ✓ same sign |
-| Drop top 1% cashout outliers | −16,200 | 2,500 | <0.001 | ✓ within 50% |
+| Drop top 1% outliers | −16,200 | 2,500 | <0.001 | ✓ within 50% |
 | Minimal controls (only treated + post + DiD) | −17,800 | 3,200 | <0.001 | ✓ |
-| Alt outcome (cashout count instead of amount) | −1.4 (count) | 0.3 | <0.001 | ✓ same sign |
+| Alt outcome (event count instead of amount) | −1.4 (count) | 0.3 | <0.001 | ✓ same sign |
 | Drop pre-period > 30d before treatment | −19,200 | 3,100 | <0.001 | ✓ |
-| Drop region North (1 specific large region) | −15,800 | 2,800 | <0.001 | ✓ |
+| Drop one large region | −15,800 | 2,800 | <0.001 | ✓ |
 
 Verdict: ROBUST. All 7 specs same sign; magnitude variation 15,800 to 19,200 (range = 22% of headline, well within 50%).
 

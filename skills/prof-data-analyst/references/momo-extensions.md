@@ -2,7 +2,7 @@
 
 This reference bundles the MoMo-specific tooling (Semantic Cube, momo-data MCP, Mimir tags, OpenMetadata curation) that make this plugin a **complete harness for MoMo DA stakeholders**. The rest of the plugin is portable across companies; this file is the org-specific layer.
 
-**Audience**: Loc Tu + any MoMo DA / AE / PO using this skill in the MoMo workspace. Non-MoMo users can ignore this file entirely — the plugin's portable behavior is unaffected.
+**Audience**: anyone using this plugin within MoMo's data platform (Semantic Cube + momo-data MCP + `datacatalog.mservice.io`). Non-MoMo users can ignore this file entirely — the plugin's portable behavior is unaffected.
 
 ## What MoMo adds on top of the portable plugin
 
@@ -21,7 +21,7 @@ This reference bundles the MoMo-specific tooling (Semantic Cube, momo-data MCP, 
 
 MoMo's semantic layer = Synmetrix (open-source fork) + Cube.js core + Hasura (metadata GraphQL) + React UI (Explore / Models / Dictionary / Settings).
 
-**Onboarding**: see full reference at `<workspace>/notes/loctu-pkm/1-notes/semantic-cube-reference.md` (833 lines, covers spec + 5-step workflow + 23 interview Q&A + 6-phase build recipe).
+**Onboarding**: keep a full local reference for Semantic Cube spec + 5-step workflow + build recipe (see the publicly-linked docs at the bottom of this file). Cube YAML conventions, meta block, measure/dimension/join semantics, pre-aggregations, and Đặc Tả Tiêu Chuẩn are mandatory reading before authoring cubes.
 
 **Quick links**:
 - Production: `https://semanticcube-doc.mservice.io/docs/intro`
@@ -157,7 +157,7 @@ OpenMetadata (`datacatalog.mservice.io`) is MoMo's canonical data catalog. Two l
 1. **Auto-ingested** (column names, types, partition keys synced from BQ) — never edit
 2. **Curated** (table desc, column desc, tags, ownership, lineage) — humans + agents own this
 
-Full playbook (fetch → audit → dry-run → push → cross-validate) lives at `<workspace>/lt-memory/setup/openmetadata-workflow.md` (~242 lines). Key API mechanics:
+Full playbook (fetch → audit → dry-run → push → cross-validate) is summarized below; deep mechanics are at `https://datacatalog.mservice.io/swagger`. Key API mechanics:
 
 ### Auth + endpoints
 
@@ -183,12 +183,12 @@ Body: [{"op": "add", "path": "/columns/0/description", "value": "<new>"}, ...]
 When refactoring schema descriptions (e.g. HTML→markdown cleanup, content fix, bi-ref insertion):
 
 1. **Discovery** — fetch full schema, dump to UTF-8 file for diffability, count cols, scan formats
-2. **Audit** (read-only) — compare against `lt-memory/domains/<X>/tables.md` if exists; spot-check 5-10 cols; categorize issues (format / content / structural)
+2. **Audit** (read-only) — compare against any local domain notes that exist; spot-check 5-10 cols; categorize issues (format / content / structural)
 3. **Build** (dry-run) — write script with `--push` flag (default = dry-run); output old vs new side-by-side
 4. **Push** — single PATCH with batched ops array (atomic); patch only changed cols; verify version bumped
-5. **Cross-validate + record** — verify sibling tables (daily ↔ monthly) consistent; update local `lt-memory/domains/<X>/tables.md`
+5. **Cross-validate + record** — verify sibling tables (daily ↔ monthly) consistent; update your local domain notes
 
-### Hard rules (learned from 2026-05-15 TTT mart curation)
+### Hard rules
 
 | Rule | Why |
 |------|-----|
@@ -200,7 +200,7 @@ When refactoring schema descriptions (e.g. HTML→markdown cleanup, content fix,
 | Auto-derive across siblings is DANGEROUS | Source can have content bugs (`cashin_gmv` literally said "cashout"); auto-adapt propagates the bug |
 | Bi-directional sibling reference MANDATORY | "For monthly grain → `<monthly>` (30× cheaper)" + reverse; without this, 30× cost incurred silently |
 | Dry-run to file, READ IT, then push | Don't trust transformation function from samples alone |
-| Advisor checkpoint before push when scope expands beyond mechanical | 191-column "auto-adapt" plan caught pre-push by advisor |
+| Independent-review checkpoint before push when scope expands beyond mechanical | A large auto-adapt plan can quietly corrupt sibling tables if source has content bugs; a fresh-eyes pass catches what the author misses |
 
 ### When to push T1 fix vs flag for owner
 
@@ -285,12 +285,6 @@ See `<plugin_root>/mcp/example-momo-mcp.json` for the JSON form (drop-in for `~/
 - Data modeling patterns → `references/mode-model.md`
 - Governance → `references/governance.md`
 - MCP suggestion at mode-exit → `references/suggestion-protocol.md` (MCP-tooling expansion category)
-
-**External (require workspace access)**:
-- Full Semantic Cube reference → `<workspace>/notes/loctu-pkm/1-notes/semantic-cube-reference.md`
-- OpenMetadata curation playbook → `<workspace>/lt-memory/setup/openmetadata-workflow.md`
-- TTT domain knowledge → `<workspace>/lt-memory/domains/ttt/`
-- AAA reference (read-only) → `<workspace>/lt-memory/domains/aaa-reference/_index.md`
 
 **External (docs)**:
 - Semantic Cube: `https://semanticcube-doc.mservice.io/docs/intro`

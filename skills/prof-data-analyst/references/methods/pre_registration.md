@@ -85,43 +85,43 @@ This is theoretical-rationale: the statistical machinery (α, p-value) assumes a
 **Status**: Locked — committed before EDA on 2026-05-14 at HH:MM
 
 ## Hypothesis (falsifiable)
-[Specific, directional claim. E.g., "The notification campaign reduces Tier-3 cashout amount by at least 10,000 VND per user per period."]
+[Specific, directional claim. E.g., "The treatment reduces the focal outcome on the targeted segment by at least 10,000 units per user per period."]
 
 ## Outcome metric
-- Definition: [cashout amount in VND]
+- Definition: [outcome name + unit]
 - Aggregation: [mean per user per period]
 - Sample unit: [user-period]
 
 ## Sample
-- Inclusion: [users in Tier 3 at campaign start; active 30d pre + 30d post]
-- Exclusion: [users with <5 transactions in pre-period; bots flagged by fraud team]
+- Inclusion: [users in the focal segment at treatment start; active 30d pre + 30d post]
+- Exclusion: [users with <5 transactions in pre-period; flagged/non-organic users]
 - Date range: [2026-02-15 to 2026-04-14]
 
 ## Method
 - Statistical test: [DiD with clustered SE at user level]
 - Identifying assumption: [parallel trends — to be tested on pre-period]
-- Robustness: [drop top 1% cashout outliers; alt outcome = cashout count]
+- Robustness: [drop top 1% outliers; alt outcome = event count]
 - Falsification: [DiD placebo on pre-pre vs pre]
 
 ## Decision rule
-- IF DiD coefficient ≤ −10,000 VND AND p < 0.05 AND parallel-trends p > 0.10 → conclude "campaign effective, recommend rollout"
-- IF DiD coefficient > −10,000 VND OR p ≥ 0.05 OR parallel-trends fails → conclude "campaign ineffective at MDE, do not roll out"
+- IF DiD coefficient ≤ −10,000 AND p < 0.05 AND parallel-trends p > 0.10 → conclude "treatment effective, recommend rollout"
+- IF DiD coefficient > −10,000 OR p ≥ 0.05 OR parallel-trends fails → conclude "treatment ineffective at MDE, do not roll out"
 
 ## Multiple testing
-- K = 1 primary outcome. Secondary outcomes (cashout count, AUM) are labeled exploratory.
+- K = 1 primary outcome. Secondary outcomes (event count, related KPIs) are labeled exploratory.
 ```
 
-## Worked example — TTT campaign pre-reg
+## Worked example — campaign pre-registration
 
-The TTT Tier 3 campaign analysis (running example throughout the causal specs) had this pre-reg committed at 2026-03-10, before data was pulled:
+A treatment-effect study used this pre-registration committed at 2026-03-10, before data was pulled:
 
-- Hypothesis: campaign reduces Tier 3 cashout by ≥ 10k VND / user / period
-- Outcome: cashout amount, mean per user-period
-- Sample: Tier 3 users active 30d pre + 30d post, exclude bots
+- Hypothesis: treatment reduces focal outcome on the targeted segment by ≥ 10,000 units / user / period
+- Outcome: focal outcome amount, mean per user-period
+- Sample: targeted segment, active 30d pre + 30d post, exclude flagged users
 - Method: DiD with clustered SE; parallel-trends test
-- Decision rule: ≤ −10k AND p<0.05 AND PT p>0.10 → effective; else not
+- Decision rule: ≤ −10,000 AND p<0.05 AND PT p>0.10 → effective; else not
 
-Result: DiD = −18,500 (CI: −24,200 to −12,800), p < 0.001, PT p = 0.34 → CONFIRMATORY: "campaign effective, recommend rollout."
+Result: DiD = −18,500 (CI: −24,200 to −12,800), p < 0.001, PT p = 0.34 → CONFIRMATORY: "treatment effective, recommend rollout."
 
 If instead DiD had been −5,000 with p < 0.05, the verdict would have been "ineffective at MDE, do not roll out" — even though p < 0.05. The pre-reg locked the MDE-based decision rule, not just a p-value.
 

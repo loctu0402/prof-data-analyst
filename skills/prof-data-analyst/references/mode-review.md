@@ -244,10 +244,10 @@ Run ALL of the following passes. Each pass produces findings rows.
 
 #### Pass 2 — Business logic + domain accuracy
 - Cite-check every external number (bank rates / market prices / industry benchmarks): verified vs canonical source, dated
-- Domain terms used correctly (TTT vs MP, VA vs AI, CASA SLTU vs current account, etc.)
+- Domain terms used correctly (product acronyms, channel names, account types not confused with one another)
 - Cohort definitions consistent across cards
 - Currency / unit / time-zone consistent
-- "Obvious by definition" statements flagged (e.g., "Tier 3 rút nhiều" — Tier 3 is defined by cashout %)
+- "Obvious by definition" statements flagged (e.g., a tier defined as "heavy withdrawers" being labeled "withdraws a lot")
 
 #### Pass 3 — Method maturity (the rigor pass)
 Compare method-actually-used vs the decision table in `references/causal-inference-toolkit.md`:

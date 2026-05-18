@@ -107,7 +107,7 @@ Muốn pursue 1+ option, hay đủ rồi? (skip cũng OK — đây là gợi ý 
 
 If signal-detection finds < 3 relevant categories, propose fewer (e.g., 1-2). Do not pad.
 
-Full protocol + 3 worked examples (TTT report / insight correlation / DuckDB prototype): `${CLAUDE_PLUGIN_ROOT}/skills/prof-data-analyst/references/suggestion-protocol.md`.
+Full protocol + 3 worked examples (stakeholder report / insight correlation / DuckDB prototype): `${CLAUDE_PLUGIN_ROOT}/skills/prof-data-analyst/references/suggestion-protocol.md`.
 
 ## What you DO NOT do
 

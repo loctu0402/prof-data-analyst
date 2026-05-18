@@ -30,7 +30,7 @@ A reader scanning headings should be able to predict the gate logic.
 **Entry:** Scope is locked.
 **Exit:** All required tables identified, sampled (partition-safe), schema documented in a Data Dictionary, freshness verified (data_date derived from `df.iloc[-1]`, not assumed). A 6-Step EDA pass is complete (S1 dtype → S2 univariate → S3 anomaly → S4 bivariate → S5 ranking → S6 patterns).
 **Fail-mode:** Mart lag undetected, schema assumed, anomaly missed.
-**Why (Empirical):** Past incidents — TTT mart T-2 lag, duplicate rows on backfill, fct_ vs legacy union — happen at this gate. The 6-step EDA pass is the structured catch.
+**Why (Empirical):** Past incidents — mart T-2 lag, duplicate rows on backfill, legacy-vs-current schema union mismatch — happen at this gate. The 6-step EDA pass is the structured catch.
 
 ## Gate 3: Analysis
 

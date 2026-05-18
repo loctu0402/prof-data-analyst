@@ -15,7 +15,7 @@ SCQR pattern:
 
 ### For dashboards / HTML reports
 3-line intro:
-- Line 1: What data + time range covered (e.g., "TTT daily snapshots, 2026-04-01 → 2026-05-08")
+- Line 1: What data + time range covered (e.g., "product daily snapshots, 2026-04-01 → 2026-05-08")
 - Line 2: Primary question this dashboard answers
 - Line 3: Reading order / how-to-use note (which tab first, what to skip)
 
@@ -36,7 +36,7 @@ Executive Summary block right after Data Dictionary, BEFORE body. Table-based fo
 
 ### Terminology Block — add when
 - Complex / first-time / niche / multi-meaning terms appear
-- MoMo-specific acronyms (TTT, KVBD, MP, VA, AI, IS_MP, mart_*, CASA SLTU, CO/CI)
+- Org-specific acronyms (product codes, channel names, mart tables, account types)
 - Bank / fintech jargon a non-DA reader would miss
 - Format: 1-line definition per term, alphabetical, right after Orientation
 
@@ -77,8 +77,8 @@ Bare "X giảm 5%" without noise check = REJECTED.
 
 ### Rung 3 — Impact or Worth
 Verdict from {negligible, small, medium, large} based on:
-- Business threshold (e.g., 1% AUM gap = ~0.5T VND on TTT = "medium")
-- Cohort size affected (Tier 3 = 71% of drain → "large")
+- Business threshold (e.g., 1% AUM gap on a flagship product = "medium")
+- Cohort size affected (one tier = 71% of drain → "large")
 - Reversibility / persistence
 - Stakeholder priority (revenue / cost / risk / compliance)
 
@@ -114,17 +114,17 @@ Every proposed action (recommendation, fix, follow-up) MUST come with an 8-field
 - Missing How → action stays abstract
 
 ### Anti-pattern
-"Recommend deeper investigation into Tier 3 behavior" — ZERO of 8 fields filled. Reject.
+"Recommend deeper investigation into the heavy-withdrawal tier" — ZERO of 8 fields filled. Reject.
 
 ### Right pattern
-- **Question**: Why did Tier 3 drain 1,649B over 24 days while Tier 1 stayed positive?
-- **Goal**: Identify top-2 mechanism by 2026-05-20; reduce Tier-3 drain rate by 30% by 2026-06-30
-- **Why**: Report section 4.2 finds Tier 3 = 71% of total drain, but mechanism not isolated
-- **What**: Behavioral cohort analysis on Tier 3 cashout patterns; OUT-of-scope: Tier 1/2/MP redesign
-- **Who**: Loc + Phong (DA) + Hung (product owner)
+- **Question**: Why did the heavy-withdrawal tier drain 1,649B over 24 days while the lighter tier stayed positive?
+- **Goal**: Identify top-2 mechanism by 2026-05-20; reduce that tier's drain rate by 30% by 2026-06-30
+- **Why**: Report section 4.2 finds the heavy-withdrawal tier = 71% of total drain, but mechanism not isolated
+- **What**: Behavioral cohort analysis on the heavy-withdrawal tier cashout patterns; OUT-of-scope: redesign of the other tiers
+- **Who**: DA + product owner
 - **When**: Hypothesis matrix 2026-05-15; validation analysis 2026-05-20; intervention proposal 2026-05-25
-- **Where**: TTT product, all regions, all balance ranges
-- **How**: Start with `mart_ttt_daily_user_record` filtered to Tier 3 cohort, run drain-anatomy SQL pattern from `references/framework.md`
+- **Where**: focal product, all regions, all balance ranges
+- **How**: Start with the daily user-level mart filtered to the heavy-withdrawal tier, run the drain-anatomy SQL pattern from your domain templates
 
 ### Tone for C-level / CEO audience
 Frame as "Next steps" timeline DIRECTIVE, not "Cần phê duyệt" checkbox. Same content, different frame — approval-ask suggests the team isn't taking ownership.
@@ -214,7 +214,7 @@ NOT "state-the-fact" alone. Example:
 
 WRONG: "Oil correlation r = −0.751"
 
-RIGHT: "Oil price +31% in March (FACT) → transport + food prices ↑ (MECHANISM) → households reallocate cash toward expenses (BEHAVIORAL CHANGE) → withdrawal from MoMo TTT for daily payments (PRODUCT IMPACT) → Payment Cashout +13.2% same period, evidence in mart_ttt_daily section 4.1 (EVIDENCE)"
+RIGHT: "Oil price +31% in March (FACT) → transport + food prices ↑ (MECHANISM) → households reallocate cash toward expenses (BEHAVIORAL CHANGE) → withdrawal from a savings product for daily payments (PRODUCT IMPACT) → Payment Cashout +13.2% same period, evidence in daily mart section 4.1 (EVIDENCE)"
 
 If you cannot fill all 5 stages, the finding is incomplete.
 

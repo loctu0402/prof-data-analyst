@@ -57,10 +57,10 @@ Pattern:
 ```python
 # update_report_v2.py
 from bs4 import BeautifulSoup
-html = open("output/ttt_daily_2026-05-08.html").read()
+html = open("output/<report>_<date>.html").read()
 soup = BeautifulSoup(html, "html.parser")
 # ... patch logic ...
-open("output/ttt_daily_2026-05-08_v2.html", "w").write(str(soup))
+open("output/<report>_<date>_v2.html", "w").write(str(soup))
 ```
 
 After patch validated: PROPOSE the equivalent change to `generate_report.py` — do not commit until user confirms.
@@ -73,14 +73,14 @@ Steps:
 1. Read cache file metadata (last-updated date, row count, column list)
 2. Check expected columns vs needed columns — schema drift?
 3. Check date range — is the missing date covered?
-4. Cross-validate with BQ direct query for the missing slice
-5. If cache missing data → repull via `--backfill-from <date>`
+4. Cross-validate with a direct engine query for the missing slice
+5. If cache missing data → repull via `--backfill-from <date>` or equivalent
 6. After backfill: verify no duplicates (`GROUP BY pk HAVING COUNT(*) > 1`)
 
-Common cache schema drift:
-- Revenue columns: 2026+ split into `plus_silver` + `plus_gold` + `plus_platinum`; pre-2026 all in `plus_silver`
-- Túi+ sales: `ttt_plus_9k` (2025+, single 9k) vs `fct_ttt_plus_9k` (2026+, 3 tiers) — UNION for full history
-- Xu → VND ratio changed 2026-04-01 from 0.5 to 0.8
+Common cache schema drift to check:
+- A column got split into N sub-columns at a known cutover date — UNION old + new for full history
+- A conversion ratio changed at a known date — branch the formula on date
+- An entity-classification changed (e.g. tier definition refactor) — verify alignment with new taxonomy
 
 ## Numerical Debug
 
@@ -162,12 +162,10 @@ See `feedback_html_parser_robustness.md`.
 
 ## MCP Fetch — Pure Python
 
-For app performance pipeline:
-- Use direct HTTP MCP client (NOT Claude CLI subprocess)
-- Kill silent dashboard.html fallback (was hiding real fetch failures)
-- Add DoD + 7d-avg deltas + duration p50 / p90 (≥500 filter) to webhook
-
-See `knowledge_ttt_app_mcp_fetch_pure_python.md`.
+For an app performance dashboard pipeline:
+- Use a direct HTTP MCP client (NOT a Claude CLI subprocess)
+- Kill any silent HTML fallback (it hides real fetch failures)
+- Add DoD + 7d-avg deltas + duration p50 / p90 (with a minimum-sample filter) to the webhook payload
 
 ## Validate Fix Before Declaring Done
 

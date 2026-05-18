@@ -144,7 +144,7 @@ Ask:
 - Is this a one-off (build for this project) or recurring (build into platform)?
 
 **Phase 3.2 — Discovery protocol** (full detail: `domain-discovery-protocol.md`)
-1. Check registry: does `lt-memory/domains/<X>/` exist? → reuse
+1. Check registry: does `<your-workspace>/domain-knowledge/<X>/` exist? → reuse
 2. Schema scan: `INFORMATION_SCHEMA.TABLES` filter by likely keywords; cost < $0.01
 3. Partition-safe sample: top 100 rows of 1 candidate table; cost < $0.10
 4. User approval gate: "Found N candidate tables. Volume + cost estimate: $X. Proceed?"

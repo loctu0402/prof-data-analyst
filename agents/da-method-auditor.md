@@ -84,8 +84,8 @@ Plus a 1-paragraph verdict per claim.
 - DO NOT recommend Synthetic Control just because "it's fancy." Match to data shape (1 treated unit + long pre-series).
 - DO read causal-inference-toolkit.md before judging. The decision table is your reference.
 - DO bake the positive + negative examples:
-  - GOOD: "Claim: campaign reduced cashout. Data: panel with treated cohort + matched control + 60d pre + 30d post. Method used: DiD with clustered SE + parallel-trends test (p=0.34). Verdict: appropriate."
-  - BAD: "Claim: campaign caused +12% retention. Data: pre/post on treated only. Method used: paired t-test. Verdict: BLOCKER — no control group, cannot identify causal effect; recommend DiD with matched control."
+  - GOOD: "Claim: treatment reduced focal outcome. Data: panel with treated cohort + matched control + 60d pre + 30d post. Method used: DiD with clustered SE + parallel-trends test (p=0.34). Verdict: appropriate."
+  - BAD: "Claim: treatment caused +12% retention. Data: pre/post on treated only. Method used: paired t-test. Verdict: BLOCKER — no control group, cannot identify causal effect; recommend DiD with matched control."
 
 ## Fresh-session discipline
 

@@ -123,24 +123,24 @@ print(pd.DataFrame({
 }))
 ```
 
-## Worked example — Tier-3 campaign on 6 outcomes
+## Worked example — campaign on 6 outcomes
 
-Setup: the TTT campaign DiD from `methods/did.md` was run on 6 outcomes simultaneously (cashout amount, cashout count, AUM, login frequency, screen views, churn rate). All 6 p-values reported.
+Setup: the DiD from `methods/did.md` was run on 6 outcomes simultaneously (focal outcome amount, outcome count, AUM-equivalent, login frequency, screen views, churn rate). All 6 p-values reported.
 
 Raw p-values: 0.001, 0.04, 0.018, 0.045, 0.07, 0.30.
 
 | H | Outcome | p_raw | Bonferroni (α=0.05/6=0.0083) | BH-FDR (rank/6 × 0.05) | BF verdict | BH verdict |
 |---|---------|-------|------------------------------|------------------------|------------|------------|
-| H1 | Cashout amount | 0.001 | 0.0083 | 1/6×0.05 = 0.0083 | reject | reject |
+| H1 | Focal outcome amount | 0.001 | 0.0083 | 1/6×0.05 = 0.0083 | reject | reject |
 | H2 | AUM | 0.018 | 0.0083 | 2/6×0.05 = 0.0167 | NS | NS |
-| H3 | Cashout count | 0.040 | 0.0083 | 3/6×0.05 = 0.025 | NS | NS |
+| H3 | Outcome count | 0.040 | 0.0083 | 3/6×0.05 = 0.025 | NS | NS |
 | H4 | Login freq | 0.045 | 0.0083 | 4/6×0.05 = 0.0333 | NS | NS |
 | H5 | Screen views | 0.070 | 0.0083 | 5/6×0.05 = 0.0417 | NS | NS |
 | H6 | Churn rate | 0.300 | 0.0083 | 6/6×0.05 = 0.050 | NS | NS |
 
-Verdict: under both Bonferroni and BH-FDR, only H1 (cashout amount) survives. The other 4 "significant" raw-p findings disappear after correction — they were likely false positives from running 6 tests.
+Verdict: under both Bonferroni and BH-FDR, only H1 (focal outcome amount) survives. The other 4 "significant" raw-p findings disappear after correction — they were likely false positives from running 6 tests.
 
-This changes the report's claim from "campaign affected cashout amount, count, AUM, login freq" to "campaign affected cashout amount only at strict significance."
+This changes the report's claim from "campaign affected focal amount, count, AUM, login freq" to "campaign affected focal amount only at strict significance."
 
 ## Anti-patterns
 

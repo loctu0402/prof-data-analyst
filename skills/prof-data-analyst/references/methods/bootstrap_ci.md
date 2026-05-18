@@ -111,29 +111,29 @@ point, lo, hi, se = bootstrap_ci(df["metric"].values)
 print(f"{point:.3f} (95% CI: {lo:.3f} – {hi:.3f}; SE = {se:.3f})")
 ```
 
-## Worked example — median cashout per user (small sample)
+## Worked example — median focal metric per user (small sample)
 
-Setup: a pilot Tier 3 cohort of n=21 users completed the new flow. Headline: median cashout amount.
+Setup: a pilot cohort of n=21 users completed a new flow. Headline: median value of the focal metric.
 
 ```python
 import numpy as np
 import pandas as pd
 
-df = pd.read_csv("output/projects/pilot-cohort/cashout.csv")  # n=21
-point, lo, hi, se = bootstrap_ci(df["cashout"].values, statistic=np.median, B=10000)
+df = pd.read_csv("output/projects/pilot-cohort/metric.csv")  # n=21
+point, lo, hi, se = bootstrap_ci(df["metric"].values, statistic=np.median, B=10000)
 
-print(f"Median cashout: {point:,.0f} VND (95% CI: {lo:,.0f} – {hi:,.0f}; bootstrap SE = {se:,.0f})")
+print(f"Median metric: {point:,.0f} (95% CI: {lo:,.0f} – {hi:,.0f}; bootstrap SE = {se:,.0f})")
 ```
 
 Result (illustrative):
-- Median cashout: 280,000 VND
-- 95% bootstrap CI: 95,000 – 450,000 VND
-- Bootstrap SE: 92,000 VND
+- Median: 280,000
+- 95% bootstrap CI: 95,000 – 450,000
+- Bootstrap SE: 92,000
 
-Verdict: pilot median is reportable, but CI is wide (gap = 355k VND vs point estimate 280k) — pilot needs scaling to narrow precision before any business decision.
+Verdict: pilot median is reportable, but CI is wide (gap = 355k vs point estimate 280k) — pilot needs scaling to narrow precision before any business decision.
 
 Narrative for report:
-> Pilot cohort n=21 cho median cashout 280k VND (95% bootstrap CI: 95k – 450k). CI rộng so với point estimate — cần mở pilot rộng hơn (target n=100) trước khi quyết định scale.
+> Pilot cohort n=21 produced a median focal value of 280k (95% bootstrap CI: 95k – 450k). The CI is wide relative to the point estimate — extend the pilot (target n=100) before scaling decisions.
 
 ## Anti-patterns — what NOT to do
 

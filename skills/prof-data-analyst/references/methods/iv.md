@@ -112,13 +112,13 @@ print(results.first_stage)
 print(results.anderson_rubin)
 ```
 
-## Worked example — TTT signup driven by promo
+## Worked example — feature signup driven by promo
 
-Setup: stakeholder claims that TTT signup CAUSES higher wallet retention. OLS regression shows positive correlation, but signup is endogenous — motivated users both sign up AND retain (selection bias).
+Setup: stakeholder claims that feature signup CAUSES higher wallet retention. OLS regression shows positive correlation, but signup is endogenous — motivated users both sign up AND retain (selection bias).
 
-Instrument: random A/B-test exposure to a one-time TTT promo (50% of new users randomly saw the promo banner, 50% didn't).
+Instrument: random A/B-test exposure to a one-time feature-launch promo (50% of new users randomly saw the promo banner, 50% didn't).
 
-- Treatment (X): signs up for TTT (binary)
+- Treatment (X): signs up for the feature (binary)
 - Outcome (Y): wallet active 90 days post-signup
 - Instrument (Z): random promo exposure
 - Relevance: promo increases signup ✓ (testable; first-stage)
@@ -133,12 +133,12 @@ Reduced form:
 - Sign matches expectation ✓
 
 2SLS estimate:
-- β_IV = 0.04 / 0.08 = 0.50 → signing up for TTT increases 90-day retention by ~50pp for compliers
+- β_IV = 0.04 / 0.08 = 0.50 → signing up for the feature increases 90-day retention by ~50pp for compliers
 - Anderson-Rubin 95% CI: 0.32 – 0.71 ✓
 
 OLS estimate (for comparison): 0.65 — overstates the causal effect; selection bias inflated by ~30%.
 
-Verdict: TTT signup causes ~50pp retention increase for users who would sign up because of a promo (compliers). NOT the same as "if everyone signed up, retention would be 50pp higher" (ATE) — that requires extra assumptions.
+Verdict: feature signup causes ~50pp retention increase for users who would sign up because of a promo (compliers). NOT the same as "if everyone signed up, retention would be 50pp higher" (ATE) — that requires extra assumptions.
 
 ## Anti-patterns
 

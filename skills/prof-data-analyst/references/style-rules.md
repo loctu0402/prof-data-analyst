@@ -207,7 +207,7 @@ For HTML reports (generic pattern):
 - Warning boxes with left border, status icons sparingly (`🟢` `🟡` `🔴` `🟣` `⚠️`)
 - Critical-segment rows: colored border + bold for top changes
 
-Working examples per artifact type live in ``<your-workspace>/lt-memory/templates/`` (workspace-specific, not in skill).
+Working examples per artifact type live in ``your workspace's template directory`` (workspace-specific, not in skill).
 
 ## Per-Chart Inline Takeaway
 
@@ -219,7 +219,7 @@ Every chart in a deliverable MUST end with a 1-line `→ takeaway` verdict benea
 
 Reader expects a conclusion AT THE CHART, not scrolled-down reading block.
 
-Reference: bivariate chart wrappers in ``<your-workspace>/lt-memory/templates/`` print these inline.
+Reference: bivariate chart wrappers in ``your workspace's template directory`` print these inline.
 
 ## Univariate vs Bivariate — Role Split
 

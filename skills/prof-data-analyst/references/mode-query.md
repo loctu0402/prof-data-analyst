@@ -2,7 +2,7 @@
 
 Invoke when user asks: "viết SQL", "query data", "lấy data", "NL→SQL", "/da-query".
 
-This mode encodes the **agentic NL→SQL workflow** in a way that is **engine-agnostic**. Concrete SQL engines (BigQuery, Postgres, Snowflake, Redshift, DuckDB) and concrete semantic layers (MoMo Mimir, dbt, Cube.js, LookML) are treated as **replaceable adapters** behind the same workflow.
+This mode encodes the **agentic NL→SQL workflow** in a way that is **engine-agnostic**. Concrete SQL engines (BigQuery, Postgres, Snowflake, Redshift, DuckDB) and concrete semantic layers (Cube.js, dbt-metrics, LookML, MetricFlow, or any org-specific layer) are treated as **replaceable adapters** behind the same workflow.
 
 ## The Learning Loop (workflow contract)
 
@@ -34,7 +34,7 @@ Engine-specific connection details (project IDs, credentials, host/port) live OU
 Reading a table's schema + access scope + business meaning is the first thing every query mode does. Use the 5-tier ladder:
 
 ```
-T0 — Owner-curated LLM-grade tag (e.g. MoMo Mimir tag `mimir.*` in OpenMetadata)
+T0 — Owner-curated LLM-grade tag (any catalog tag namespace your org reserves for LLM-ready tables)
 T1 — Data catalog tool DIRECT API (OpenMetadata / DataHub / Atlan / Collibra)
 T2 — Access-aware metadata MCPs (mimir MCP + momo-data MCP for MoMo; equivalent for other orgs)
 T3 — Engine-native INFORMATION_SCHEMA + brainstorm step-by-step with user (the domain expert)
@@ -145,10 +145,10 @@ When 2 cache files share prefix but different scope (operational vs cumulative),
 
 ## Step 6 — RECALL → EXPLORE → LEARN Memory Pattern
 
-If the workspace has an lt-memory layout (recommended):
+If the workspace has a long-term memory layout (recommended):
 
 ```
-lt-memory/
+<your-workspace>/memory/
 ├── _index.md         ← catalog of everything learned (READ FIRST)
 ├── domains/          ← machine-written raw schemas (NEVER hand-edit)
 ├── knowledge/        ← human-written gotchas + corrections (NEVER overwrite)
@@ -201,7 +201,7 @@ Treat these as **illustration**, not requirement.
 - Excellent for ML case study DWH (see `mode-process.md` for layered tables pattern)
 - Use as drop-in for Postgres-compatible queries
 
-### Semantic / Cube Layer (MoMo Mimir example)
+### Semantic / Cube Layer (generic pattern)
 - Step 1: get team / datasource ID
 - Step 2: fetch meta (cubes / measures / dimensions)
 - Step 3: query if cube matches; fallback to raw if not
@@ -230,4 +230,4 @@ See `references/universal-workflow-rules.md` and `references/style-rules.md`.
 
 - ReAct architecture rationale → `<your-reference-dir>/agentic-sql-spec.md` (external, if you maintain one)
 - Cost projection scripts → `scripts/stats/` (in skill)
-- Domain memory pattern → your workspace's lt-memory / domain-knowledge directory if present
+- Domain memory pattern → your workspace's long-term memory / domain-knowledge directory if present

@@ -4,7 +4,7 @@
 
 ## Overview — Why this file exists
 
-Loc has a recurring pattern: domain knowledge ends up scattered across notebooks, ad-hoc queries, and partial Slack threads. The L1/L2/L3 Domain Hub pattern (`lt-memory/domains/<product>/`) only works if discovery is structured. Unstructured discovery = expensive full scans + missed partition keys + cost surprises.
+Domain knowledge tends to scatter across notebooks, ad-hoc queries, and partial chat threads. The L1/L2/L3 Domain Hub pattern (`<your-workspace>/domain-knowledge/<product>/`) only works if discovery is structured. Unstructured discovery = expensive full scans + missed partition keys + cost surprises.
 
 ## Outline (story-flow check)
 
@@ -22,7 +22,7 @@ A reader scanning headings should be able to predict each step.
 
 ## Step 0: Registry check
 
-**Action:** Search `lt-memory/domains/` for any existing hub matching the user's domain name (fuzzy match: "TTT" matches "ttt", "tuiplus" matches "tui_plus").
+**Action:** Search `<your-workspace>/domain-knowledge/` for any existing hub matching the user's domain name (fuzzy match).
 
 **Pass:** Match found → load existing hub, do NOT re-discover. Update only if user reports staleness.
 **Fail:** No match → continue to Step 1.
@@ -94,7 +94,7 @@ Wait for explicit user confirmation. If user says "no" or asks for changes, iter
 
 ## Step 4: Auto-generate L1/L2/L3 hub
 
-**Action:** Create `lt-memory/domains/<product>/` with these files:
+**Action:** Create `<your-workspace>/domain-knowledge/<product>/` with these files:
 
 | File | Content |
 |------|---------|
@@ -103,7 +103,7 @@ Wait for explicit user confirmation. If user says "no" or asks for changes, iter
 | `kpis.md` | L3 — canonical KPI definitions + reference SQL |
 | `edge-cases.md` | L3 — known gotchas (mart lag, dup risks, semantic quirks) |
 
-Use the template at `lt-memory/templates/domain-contribution/_flow.md` if it exists.
+Use whatever domain-contribution template exists in your workspace.
 
 **Why (Operational):** A 4-file structure converges; a 10-file structure fragments. L1 + L2 + 2×L3 covers 95% of future queries; more files → harder to maintain.
 
@@ -143,8 +143,8 @@ If discovery hits a hard ceiling or stalls 2x on the same step, STOP and surface
 ## Cross-references
 
 - BQ Safety Protocol (partition + dry-run + cost gate) → `mode-query.md`.
-- L1/L2/L3 Domain Hub structure → `lt-memory/templates/domain-contribution/_flow.md`.
-- Cost discipline meta → `feedback_bq_dry_run_discipline.md`.
+- L1/L2/L3 Domain Hub structure → whatever domain-contribution template your workspace maintains.
+- Cost discipline meta → engine-specific cost guardrails in `mode-query.md` Step 4.
 
 ## Why this rule exists (Rule 4 meta)
 

@@ -110,13 +110,13 @@ scores = cross_val_score(model, X, y, cv=cv, scoring="neg_mean_squared_error")
 print(f"RMSE: {np.sqrt(-scores).mean():.3f} ± {np.sqrt(-scores).std():.3f}")
 ```
 
-## Worked example — TTT signup classifier
+## Worked example — first-action classifier
 
-Setup: build a model predicting whether a new user will sign up for TTT in their first 30 days. Outcome is imbalanced (~5% positive).
+Setup: build a model predicting whether a new user will perform a focal action (sign up for a feature) in their first 30 days. Outcome is imbalanced (~5% positive).
 
 Setup:
-- 100,000 users, 5% positive (5,000 signups)
-- Features: age, MoMo tenure, average balance, transaction frequency, geo
+- 100,000 users, 5% positive (5,000 events)
+- Features: age, tenure on platform, average balance, transaction frequency, geo
 - Model: gradient boosting
 
 CV: stratified 10-fold, scoring AUC.

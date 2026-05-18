@@ -103,25 +103,25 @@ model = smf.ols(
 # Extract event-time coefficients + CIs → plot
 ```
 
-## Worked example — TTT campaign dynamics
+## Worked example — campaign dynamics
 
-Setup: same March 2026 Tier 3 notification campaign as in `methods/did.md`. Question moves from "did it work?" to "how did it work over time?"
+Setup: same March 2026 tier-targeted notification campaign as in `methods/did.md`. Question moves from "did it work?" to "how did it work over time?"
 
 Event-time coefficients (illustrative):
-- τ = −6: −500 VND (CI: −2,200 to +1,200) — pre-period, near zero ✓
-- τ = −5: +200 VND (CI: −1,800 to +2,200) ✓
-- τ = −4: −1,100 VND (CI: −3,400 to +1,200) ✓
-- τ = −3: +400 VND (CI: −1,500 to +2,300) ✓
-- τ = −2: −300 VND (CI: −2,100 to +1,500) ✓
+- τ = −6: −500 units (CI: −2,200 to +1,200) — pre-period, near zero ✓
+- τ = −5: +200 units (CI: −1,800 to +2,200) ✓
+- τ = −4: −1,100 units (CI: −3,400 to +1,200) ✓
+- τ = −3: +400 units (CI: −1,500 to +2,300) ✓
+- τ = −2: −300 units (CI: −2,100 to +1,500) ✓
 - τ = −1: OMITTED (baseline)
-- τ =  0: −12,000 VND (CI: −16,500 to −7,500) — immediate effect ✗ (significant drop)
-- τ = +1: −19,000 VND (CI: −24,000 to −14,000) — deepens
-- τ = +2: −18,500 VND (CI: −23,800 to −13,200) — plateau
-- τ = +3: −15,000 VND (CI: −20,200 to −9,800) — slight fade
+- τ =  0: −12,000 units (CI: −16,500 to −7,500) — immediate effect ✗ (significant drop)
+- τ = +1: −19,000 units (CI: −24,000 to −14,000) — deepens
+- τ = +2: −18,500 units (CI: −23,800 to −13,200) — plateau
+- τ = +3: −15,000 units (CI: −20,200 to −9,800) — slight fade
 
 Pre-period F-test on leads: p = 0.42 → parallel-trends passes.
 
-Verdict: campaign reduces Tier 3 cashout, building from −12k to plateau ~−19k VND by period 2, slight fade by period 3. The average DiD of −18.5k (from `methods/did.md`) reflects the plateau period, not the immediate effect.
+Verdict: campaign reduces the focal outcome, building from −12k at period 0 to plateau ~−19k by period 2, slight fade by period 3. The average DiD of −18.5k (from `methods/did.md`) reflects the plateau period, not the immediate effect.
 
 ## Anti-patterns
 

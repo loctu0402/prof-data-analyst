@@ -111,35 +111,35 @@ print(model.summary())   # The DiD ATT is the `did` coefficient
 # Run: python scripts/causal/parallel_trends_test.py --csv data/panel.csv ...
 ```
 
-## Worked example — TTT cashout intervention
+## Worked example — notification-campaign intervention
 
-Setup: in March 2026, MoMo launched a notification campaign targeting Tier 3 TTT users (treatment group: ~50k users). The question: did the campaign reduce cashout by Tier 3 users?
+Setup: in March 2026, a fintech app launched a notification campaign targeting a specific tier of active users (treatment group: ~50k users). The question: did the campaign reduce a focal withdrawal outcome on that tier?
 
-Data: 60-day panel before campaign + 30-day panel after. Treated unit = Tier 3 users in campaign cohort. Control unit = Tier 3 users NOT in campaign cohort (selected by matching demographics).
+Data: 60-day panel before campaign + 30-day panel after. Treated unit = tier users in the campaign cohort. Control unit = tier users NOT in the campaign cohort (selected by matching demographics).
 
 ```python
-df = pd.read_csv("output/projects/ttt-march-campaign/panel.csv")
+df = pd.read_csv("output/projects/<your-project>/panel.csv")
 df["post"] = (df["period"] >= "2026-03-15").astype(int)
 df["did"] = df["in_campaign"] * df["post"]
 
 model = smf.ols(
-    "cashout_amount ~ in_campaign + post + did + C(user_id) + C(period)",
+    "outcome_amount ~ in_campaign + post + did + C(user_id) + C(period)",
     data=df,
 ).fit(cov_type="cluster", cov_kwds={"groups": df["user_id"]})
 ```
 
 Result (illustrative):
-- DiD coefficient: −18,500 VND per user per period (95% CI: −24,200 to −12,800)
+- DiD coefficient: −18,500 units per user per period (95% CI: −24,200 to −12,800)
 - p-value: < 0.001
 - Parallel-trends test on pre-period: p = 0.34 → passes
 - Clustered SE at user_id: yes
-- Robustness — same result holds when dropping top 1% cashout outliers
-- Falsification — placebo DiD on Jan vs Feb (no treatment): coefficient = +450 VND, p = 0.78 → passes
+- Robustness — same result holds when dropping top 1% outliers
+- Falsification — placebo DiD on Jan vs Feb (no treatment): coefficient = +450 units, p = 0.78 → passes
 
-Verdict: campaign reduced Tier 3 cashout by ~18.5k VND per user per period. Confirmed under all 6 acceptance criteria.
+Verdict: campaign reduced the focal outcome by ~18,500 units per user per period. Confirmed under all 6 acceptance criteria.
 
 Narrative for report:
-> Chiến dịch notification giảm cashout của Tier 3 trung bình 18,500 VND / user / kỳ (95% CI: 12,800 – 24,200). Kết quả pass parallel-trends test (p=0.34), robustness (drop top 1% giữ nguyên dấu), và falsification (DiD placebo pre-pre cho 450 VND ns).
+> The notification campaign reduced the focal outcome on the targeted tier by 18,500 units per user per period (95% CI: 12,800 – 24,200). Result passes parallel-trends test (p=0.34), robustness (drop top 1% keeps the sign), and falsification (DiD placebo on pre-pre returned +450 units, not significant).
 
 ## Anti-patterns — what NOT to do
 

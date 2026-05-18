@@ -11,7 +11,7 @@ Rule 1 (Orientation Block) mandates SCQR. That is necessary but not sufficient. 
 1. SCQR (Situation / Complication / Question / Resolution)
 2. Key Terms block (3-6 terms, diacritics correct, plain language)
 3. Impact Cards (3-4 cards, sentiment colored, one-line takeaway)
-4. Worked example (TTT daily snapshot pattern)
+4. Worked example (daily product snapshot pattern)
 5. Anti-patterns
 
 A reader scanning headings should be able to predict each block's role.
@@ -44,8 +44,8 @@ Kết luận (Resolution): <1 sentence, the headline answer + recommended action
 **Thuật ngữ chính (Key Terms)**
 
 - **DAU**: Số người dùng có ít nhất một sự kiện active (login + screen view + transaction) trong ngày. Loại bỏ bot và internal account.
-- **TTT**: Tài khoản Tích Trữ — sản phẩm gửi tiết kiệm trên app, lãi suất X% năm, kỳ hạn linh hoạt.
-- **Cashout**: Sự kiện rút tiền ra khỏi TTT về MoMo wallet, không phải về bank.
+- **<Product>**: <Định nghĩa sản phẩm — 1 câu plain language>.
+- **Cashout**: Sự kiện rút tiền ra khỏi sản phẩm về wallet, không phải về bank.
 ```
 
 **Pass signal:** A new reader who never saw this product can read the Key Terms and follow the body.
@@ -78,26 +78,26 @@ Kết luận (Resolution): <1 sentence, the headline answer + recommended action
 
 **Why (Empirical):** A single delta ("GMV +5%") is noise without comparison. The dual-comparison mandate (DoD + 7d avg) lets the reader distinguish trend from seasonality at a glance. Color delivers verdict in 100ms.
 
-## Worked example: TTT daily snapshot opening
+## Worked example: daily product snapshot opening
 
 ```
 ## Bối cảnh & Câu hỏi (SCQR)
 
-Tình hình: Sản phẩm TTT đang chạy tháng thứ 4 của 2026, AUM 5.2 nghìn tỷ.
+Tình hình: Sản phẩm <X> đang chạy tháng thứ 4 của 2026, AUM 5.2 nghìn tỷ.
 Vấn đề: Cashout đột biến tăng 12% ngày 2026-05-08 so với ngày trước, cao hơn 15% so với trung bình 7 ngày.
 Câu hỏi: Đột biến cashout đến từ tier nào? Có cần can thiệp không?
-Kết luận: Tier 3 (số dư <500k) chiếm 78% lượng cashout tăng thêm. Đề xuất kiểm tra notification campaign ngày 07/05 (tác động đến tier 3).
+Kết luận: Tier thấp (số dư <500k) chiếm 78% lượng cashout tăng thêm. Đề xuất kiểm tra notification campaign ngày 07/05 (tác động đến tier đó).
 
 ## Thuật ngữ chính (Key Terms)
 
-- **TTT**: Tài khoản Tích Trữ — sổ tiết kiệm trên app.
-- **AUM**: Tài sản đang quản lý — tổng số dư tất cả TTT chưa cashout.
-- **Cashout**: Rút tiền từ TTT về wallet MoMo.
+- **<Product>**: <Định nghĩa sản phẩm — sổ tiết kiệm / ví / tài khoản đầu tư, ...>
+- **AUM**: Tài sản đang quản lý — tổng số dư đang giữ trong sản phẩm.
+- **Cashout**: Rút tiền từ sản phẩm về wallet / bank.
 - **Tier**: Phân nhóm theo số dư — Tier 1 (>5M), Tier 2 (500k-5M), Tier 3 (<500k).
 
 ## Tóm tắt nhanh (Impact Cards)
 
-[Tổng AUM]              [Cashout hôm nay]       [Tỷ lệ Cashout/AUM]    [Tier 3 share]
+[Tổng AUM]              [Cashout hôm nay]       [Tỷ lệ Cashout/AUM]    [Tier thấp share]
 5.2 nghìn tỷ            3.5 tỷ                  0.067%                  78%
 ▼ DoD −0.2%              ▲ DoD +12%              ▲ DoD +12%              ▲ DoD +20pp
 ▲ vs 7d avg +1%          ▲ vs 7d avg +15%        ▲ vs 7d avg +14%        ▲ vs 7d avg +18pp

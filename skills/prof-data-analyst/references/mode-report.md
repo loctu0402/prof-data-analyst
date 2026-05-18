@@ -7,7 +7,7 @@ Invoke when user asks: "build báo cáo", "làm report", "stakeholder report", "
 ```
 What is the report for?
   │
-  ├─ Daily ops snapshot (TTT, VA fraud, App perf)
+  ├─ Daily ops snapshot (product / fraud / app performance)
   │   └─ shared/templates/daily-email/
   │
   ├─ Idea / scheme verification (gross yield, breakeven, tier proposal)
@@ -143,7 +143,7 @@ The [Q] [A] [Why] triplet stays in YOUR working notes; only [A] appears on the s
 
 SCQR is the document-level frame; storyline is the per-slide / per-section frame. Question-based framing is the bridge — each section's [Q] is a sub-Q of the document's Q in SCQR.
 
-**Why question-based framing (Empirical):** consulting playbook (McKinsey/BCG/Bain) trains junior consultants to draft the question FIRST, then the answer, then the chart. Skipping the question → analyst builds charts looking for something interesting → slide titles become topics ("Cost analysis") not conclusions ("Costs grew 23% in Q3, driven by 2 vendors"). Loc field test 2026-05-15 confirmed: walkthrough demos read clearer when [Q] is explicit even though stakeholder only sees [A].
+**Why question-based framing (Empirical):** consulting playbook (McKinsey/BCG/Bain) trains junior consultants to draft the question FIRST, then the answer, then the chart. Skipping the question → analyst builds charts looking for something interesting → slide titles become topics ("Cost analysis") not conclusions ("Costs grew 23% in Q3, driven by 2 vendors"). Decks read clearer when [Q] is explicit even though the stakeholder only sees [A].
 
 **Anti-patterns:**
 - Generic slide titles ("Business Update", "Q2 Review", "Cost Analysis") → readers don't know the point
@@ -189,7 +189,7 @@ See `feedback_inspection_audit_when_screenshot_unreliable.md` for the past incid
 ### Step 8 — Save to output/
 - `output/reports/` for generic reports
 - `output/projects/<project>/` for project-tied output
-- Filename: `<topic>_<YYYY-MM-DD>.html` (e.g., `ttt_daily_snapshot_2026-05-08.html`)
+- Filename: `<topic>_<YYYY-MM-DD>.html` (e.g., `daily_snapshot_2026-05-08.html`)
 - Also write `<topic>_latest.html` symlink / copy for stakeholder bookmark
 
 ## Master Checklist Items (top-of-mind)

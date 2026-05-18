@@ -107,14 +107,14 @@ print(f"Placebo DiD: {model.params['placebo_did']:.3f} (p={model.pvalues['placeb
 # Should be near zero with p > 0.10
 ```
 
-## Worked example — DiD placebo period for TTT campaign
+## Worked example — DiD placebo period
 
-From `methods/did.md`: real DiD effect on Tier 3 cashout = −18,500 VND (p < 0.001) with treatment at 2026-03-15.
+From `methods/did.md`: real DiD effect on the treated segment = −18,500 units per user per period (p < 0.001) with treatment at 2026-03-15.
 
 Placebo: pretend treatment happened at 2026-02-01 (mid-pre-period). Re-run DiD on the pre-pre vs pre periods only.
 
 Result (illustrative):
-- Placebo DiD coefficient: +450 VND per user per period
+- Placebo DiD coefficient: +450 units per user per period
 - 95% CI: (−1,800, +2,700)
 - p-value: 0.78
 
