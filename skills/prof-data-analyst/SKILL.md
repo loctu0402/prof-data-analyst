@@ -229,6 +229,14 @@ Once mode is selected:
 - Sub-agent prompt discipline (anti-shortcut + handoff drift + fresh-session + context-packet) → `references/subagent-prompt-discipline.md`
 - Domain discovery protocol (new-domain L1/L2/L3 generation) → `references/domain-discovery-protocol.md`
 
+**Schema discovery + semantic layer (v3.3 — new):**
+- Schema source hierarchy (T0 owner-tag → T1 catalog → T2 cube → T3 INFORMATION_SCHEMA → T4 sampling) → `references/schema-source-hierarchy.md`
+- Semantic layer setup (portable 6-phase recipe, engine-agnostic) → `references/semantic-layer-setup.md`
+
+**MoMo stakeholder extensions (v3.3 — new, opt-in):**
+- MoMo Semantic Cube + momo-data MCP + Mimir tag + OpenMetadata workflow → `references/momo-extensions.md`
+- Example MCP config (mimir + momo-data + powerbi-modeling) → `<plugin_root>/mcp/example-momo-mcp.json`
+
 **Mode-specific:**
 - `references/mode-{frame,model,query,process,insight,automation,report,review,fix-pipeline}.md`
 

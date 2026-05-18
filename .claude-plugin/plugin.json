@@ -1,7 +1,7 @@
 {
   "name": "prof-data-analyst",
-  "version": "3.2.2",
-  "description": "Professional Data Analyst + Analytics Engineer plugin — 9 routable modes (Frame/Model/Query/Process/Insight/Automation/Report/Review/Fix), engine-agnostic SQL, 14 stdlib scripts, 4 mandatory rules + Proactive Suggestion at Mode Exit, 14 method spec files (causal + validation families), planning protocol (TH1/TH2), metric framework selection (NSM/OMTM/Growth Loop/HEART), 4 data modeling patterns (Kimball/dbt/Medallion/DuckDB), 6-section governance, 5 orchestration patterns (Airflow/dbt+GHA/cron/GitHub Actions/Google Apps Script), storytelling, suggestion protocol (8 extension categories). 1-stop-shop end-to-end DA + AE harness with proactive capability discovery.",
+  "version": "3.3.0",
+  "description": "Professional Data Analyst + Analytics Engineer plugin — 9 routable modes (Frame/Model/Query/Process/Insight/Automation/Report/Review/Fix), engine-agnostic SQL, 14 stdlib scripts, 4 mandatory rules + Proactive Suggestion at Mode Exit, 14 method spec files (causal + validation families), planning protocol (TH1/TH2), metric framework selection (NSM/OMTM/Growth Loop/HEART), 4 data modeling patterns (Kimball/dbt/Medallion/DuckDB), 6-section governance, 5 orchestration patterns (Airflow/dbt+GHA/cron/GitHub Actions/Google Apps Script), storytelling, suggestion protocol (8 extension categories), semantic-layer setup recipe + 5-tier schema-source hierarchy + MoMo stakeholder extensions (Semantic Cube + momo-data MCP + Mimir tag + OpenMetadata curation). 1-stop-shop end-to-end DA + AE harness with proactive capability discovery.",
   "author": {
     "name": "Loc Tu",
     "email": "loc.tu@mservice.com.vn"

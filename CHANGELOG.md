@@ -4,6 +4,25 @@ All notable changes to `prof-data-analyst` plugin.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [3.3.0] — 2026-05-18
+
+Minor release: schema-discovery hierarchy + portable semantic-layer recipe + MoMo stakeholder extensions. Turns the plugin into a full harness for MoMo DA users (Semantic Cube + momo-data MCP + Mimir tag + OpenMetadata curation) while keeping the portable core engine-agnostic.
+
+### Added
+- **`references/schema-source-hierarchy.md`** — 5-tier ladder restructured so access-aware MCPs sit ABOVE raw INFORMATION_SCHEMA: T0 owner-curated LLM tag → T1 catalog DIRECT API → T2 access-aware metadata MCPs (mimir MCP `get_domain_schema` + momo-data MCP semantic cube + data portal docs; per-user-access-filtered) → T3 INFORMATION_SCHEMA + brainstorm step-by-step with user (the human domain expert) → T4 sampling. Decision tree, per-tier rationale, audit-vs-trust matrix. Engine-agnostic with MoMo tools as concrete examples. Rationale for T2 placement: catalog API and INFORMATION_SCHEMA both fail the same way — show what org HAS, not what YOU can use. Access-aware MCPs bridge that gap.
+- **`references/semantic-layer-setup.md`** — Portable 6-phase recipe (Discovery → Architecture → Foundation cube template → Layered modeling → Pre-aggregation → Delivery+Governance → Operate). Works for Cube.js / dbt-metrics / LookML / MetricFlow. Derived from MoMo Semantic Cube reference §9 but de-MoMo-ized for portability.
+- **`references/momo-extensions.md`** — MoMo-specific wrapper documenting all 5 entry points: Semantic Cube (Synmetrix + Cube.js), momo-data MCP gateway (semantic-/data-portal-/journey-data-/apollo- tool groups), Mimir as NL→SQL MCP + Mimir tag namespace, OpenMetadata API+PAT 5-phase curation playbook, and consolidated schema-source preference for MoMo work.
+- **`mcp/example-momo-mcp.json`** — Drop-in MCP server config snippet for `~/.claude.json` user scope. Covers momo-data + mimir-da-sql + powerbi-modeling. CLI install commands included. Optional for non-MoMo users.
+
+### Changed
+- **`references/mode-query.md` Step 2** — Refactored "semantic-first" discovery into 5-tier schema-source hierarchy with cross-reference to new `schema-source-hierarchy.md` + `momo-extensions.md`. Same behavior, more discoverable, now harmonized with the new references.
+- **`SKILL.md` "Where to Read Next"** — Added 2 new sections: "Schema discovery + semantic layer (v3.3 — new)" pointing to schema-source-hierarchy + semantic-layer-setup; "MoMo stakeholder extensions (v3.3 — new, opt-in)" pointing to momo-extensions + mcp config example.
+
+### Why
+Loc (MoMo DA, plugin author) needed the plugin to be a complete harness for MoMo stakeholders without leaking MoMo-specific tooling into the portable core. Solution: portable recipes (semantic-layer-setup, schema-source-hierarchy) in main references; org-specific tooling (Semantic Cube + 3 MCPs + Mimir tag + OpenMetadata) consolidated into one opt-in file (momo-extensions.md). MoMo users get full integration; non-MoMo users see one extra reference file they can ignore.
+
+Field trigger: 2026-05-16 Semantic Cube docs crawl produced 833-line reference at `notes/loctu-pkm/1-notes/semantic-cube-reference.md`. Loc asked to "apply ngay vào project" → this release codifies the recipe + bakes the MCP integration so future sessions can route stakeholder questions through the right tier without re-deriving the workflow.
+
 ## [3.2.2] — 2026-05-15
 
 Patch release: storyline pattern improvement (question-based framing pre-step) surfaced from random-scenario demo walkthrough.

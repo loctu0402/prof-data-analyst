@@ -12,8 +12,8 @@
         "url": "https://github.com/loctu0402/prof-data-analyst.git",
         "ref": "main"
       },
-      "description": "Professional Data Analyst + Analytics Engineer harness — 9 modes, 14 methods, 14 stdlib scripts, 4 mandatory rules + Proactive Suggestion at Mode Exit, planning protocol (TH1/TH2), 4 modeling patterns, 6-section governance, 5 orchestration patterns (Airflow/dbt/cron/GHA/Apps Script), storytelling, suggestion protocol (8 extension categories)",
-      "version": "3.2.2",
+      "description": "Professional Data Analyst + Analytics Engineer harness — 9 modes, 14 methods, 14 stdlib scripts, 4 mandatory rules + Proactive Suggestion at Mode Exit, planning protocol (TH1/TH2), 4 modeling patterns, 6-section governance, 5 orchestration patterns (Airflow/dbt/cron/GHA/Apps Script), storytelling, suggestion protocol (8 extension categories), schema-source hierarchy (5-tier) + portable semantic-layer recipe + MoMo stakeholder extensions (Semantic Cube + momo-data MCP + Mimir tag + OpenMetadata)",
+      "version": "3.3.0",
       "author": {
         "name": "Loc Tu"
       }

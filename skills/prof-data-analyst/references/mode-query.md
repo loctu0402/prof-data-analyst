@@ -29,26 +29,23 @@ Ask once at the start of a session:
 
 Engine-specific connection details (project IDs, credentials, host/port) live OUTSIDE the skill — in env vars, config files, or workspace-specific docs. The skill does not bake them in.
 
-## Step 2 — Discovery Tier (semantic-first)
+## Step 2 — Discovery Tier (schema-source hierarchy)
 
-Preference order for finding the right data, regardless of engine:
+Reading a table's schema + access scope + business meaning is the first thing every query mode does. Use the 5-tier ladder:
 
 ```
-1. Semantic / cube layer (if present)
-   - Cube.js: meta endpoint → cubes / measures / dimensions
-   - dbt-metrics: dbt show / dbt source
-   - MoMo Mimir: semantic-get-team-data → semantic-fetch-meta-by-id
-   - LookML: explore API
-2. Information schema (every engine has one)
-   - BQ: INFORMATION_SCHEMA.TABLES + COLUMNS
-   - Postgres: information_schema.tables + columns
-   - Snowflake: SHOW TABLES + INFORMATION_SCHEMA
-   - DuckDB: information_schema.* (DuckDB ships it)
-3. Vector / search over schema descriptions (if indexed)
-4. Direct table sampling (LIMIT 5) as last resort
+T0 — Owner-curated LLM-grade tag (e.g. MoMo Mimir tag `mimir.*` in OpenMetadata)
+T1 — Data catalog tool DIRECT API (OpenMetadata / DataHub / Atlan / Collibra)
+T2 — Access-aware metadata MCPs (mimir MCP + momo-data MCP for MoMo; equivalent for other orgs)
+T3 — Engine-native INFORMATION_SCHEMA + brainstorm step-by-step with user (the domain expert)
+T4 — Direct LIMIT 5 sampling (last resort, always with partition filter)
 ```
 
-Rule: ALWAYS try semantic / metric layer before raw SQL. Raw SQL is fallback when no metric matches.
+Stop at the first tier that fully answers "what columns, what do they mean, do I have access?". Full ladder rationale, decision tree, audit-vs-trust matrix → `references/schema-source-hierarchy.md`.
+
+**MoMo specifics** (Mimir tag + OpenMetadata API + mimir MCP `get_domain_schema` / `glob_search` + momo-data MCP semantic cube + data portal docs) → `references/momo-extensions.md` §5.
+
+Rule: ALWAYS try the higher tiers (T0–T2) before raw INFORMATION_SCHEMA. Owner curation + access-aware MCPs exist precisely so downstream consumers don't reinvent column meaning or hit permission errors mid-analysis.
 
 ## Step 3 — Self-Correction Loop (engine-agnostic)
 
