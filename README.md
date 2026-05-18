@@ -4,12 +4,31 @@
 
 ## Install
 
-```bash
-# Add this marketplace once
-claude /plugin marketplace add <github-username>/loctu-marketplace
+Claude Code marketplaces follow a **2-step pattern** (analogous to `apt-add-repository` then `apt install`):
 
-# Install the plugin
-claude /plugin install prof-data-analyst@loctu-marketplace
+```bash
+# Step 1 — Register the marketplace (once per machine)
+/plugin marketplace add loctu0402/prof-data-analyst
+
+# Step 2 — Install the plugin from that marketplace
+/plugin install prof-data-analyst@loctu-marketplace
+
+# Verify
+/plugin list
+# → prof-data-analyst v3.3.0 should appear
+```
+
+**Both steps required.** If `/plugin install` returns `Marketplace "loctu-marketplace" not found`, Step 1 was skipped — re-run it first.
+
+**Update to latest version** (after a new release):
+```bash
+/plugin update prof-data-analyst@loctu-marketplace
+```
+
+**Uninstall**:
+```bash
+/plugin uninstall prof-data-analyst
+/plugin marketplace remove loctu-marketplace   # optional, if you want to drop the registry too
 ```
 
 After install, the 10 slash commands are namespaced:
