@@ -55,8 +55,9 @@ Full template catalog: `<your-workspace>/shared/templates/_catalog.md` (or equiv
 - "How to read" guide for multi-tab artifacts
 - Terminology Block if niche / multi-meaning terms appear
 
-### Step 5 — Populate Body (with Baseline-Noise-Impact + Storyline)
+### Step 5 — Populate Body (with Baseline-Noise-Impact + Storyline + SWD discipline)
 - Every numeric statement passes 3 rungs (see `universal-workflow-rules.md`)
+- Every chart follows visualization discipline → `references/storytelling-with-data.md` (action title, grey + 1 accent, no pie / no 3D, clutter checklist, horizontal logic)
 - Every chart has inline `→ takeaway` verdict
 - Every table sorted DESC if "Top X"
 - Organization brand theme applied (loaded from `<your-workspace>/shared/themes/` or your equivalent module)

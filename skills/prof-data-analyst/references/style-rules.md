@@ -138,6 +138,19 @@ GMV
 
 For metrics where DoD is meaningless (weekly aggregates, monthly KPIs), substitute the relevant pair (WoW + vs 4w avg, or MoM + vs same-month-last-year).
 
+### Visualization discipline (Storytelling with Data)
+
+Chart + dashboard + slide quality rules are codified in a dedicated reference. Read FIRST before producing any visual:
+
+→ `references/storytelling-with-data.md` — 6 SWD lessons, preattentive attributes, grey + 1 accent rule, action vs topic titles, clutter checklist, Z-pattern layout, 10 anti-patterns, 60-sec pre-ship checklist.
+
+The 5-rule cheatsheet (also lives in that reference):
+1. **Action title** — every chart title states a conclusion, not a topic ("Region X leads at 78% — 7pp gap" beats "Region Awareness %")
+2. **Grey + 1 accent** — default everything to neutral grey; ONE accent color on the focal entity
+3. **No pie, no 3D** — horizontal bar > pie; 2D > 3D; slopegraph for 2-point trends
+4. **Clutter checklist** — strip border / heavy gridlines / redundant legend / 3D / shadow / gradient
+5. **Horizontal logic** — read page titles in order → must form a coherent Setup → Conflict → Resolution story
+
 ### Chart Anatomy — 7 Mandatory Elements
 
 Every chart shipped to stakeholders MUST have ALL 7 elements. Charts missing any element are NOT finished.

@@ -204,6 +204,7 @@ Once mode is selected:
 
 **Narrative + structure:**
 - SCQR + Key Terms + Impact Cards template → `references/narrative-template.md`
+- Visualization discipline (action title, grey + 1 accent, no pie / no 3D, clutter checklist, horizontal logic, 10 anti-patterns) → `references/storytelling-with-data.md`
 
 **Method specs:**
 - Methods index — router for all 14 method specs → `references/methods/_index.md`

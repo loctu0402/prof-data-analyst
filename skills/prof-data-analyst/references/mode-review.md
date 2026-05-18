@@ -182,7 +182,7 @@ Before moving to Phase 4 (Deliver the refine), run the Outline / Story Flow Chec
 3. Verify big-picture / logic-flow / step-traceability
 4. If any fails → add structural finding (heading rename / section reorder / missing bridge section) to gap table, NOT body-patching
 
-Why this is its own phase — Phase 2's mechanical audit + Phase 3's human pass both miss outline-level issues. The outline check interrogates heading skeleton, not body content. Past TymeX case: outline check caught misplaced M3 section that body-level audit passed.
+Why this is its own phase — Phase 2's mechanical audit + Phase 3's human pass both miss outline-level issues. The outline check interrogates heading skeleton, not body content. Documented case: outline check caught a misplaced milestone section that body-level audit had passed (heading order broke the narrative even though every section was individually fine).
 
 ### Phase 5 — User approval + apply fixes
 After deliver, ask user: "Approve fixes? Or revise?"

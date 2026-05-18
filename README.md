@@ -1,6 +1,6 @@
-# prof-data-analyst v3.2
+# prof-data-analyst v3.3
 
-> Professional Data Analyst + Analytics Engineer workflow as a Claude Code plugin. **9 routable modes**, 14 stdlib scripts, 14 method specs (causal + validation), 4 mandatory rules + **Proactive Suggestion at Mode Exit**, planning protocol (TH1/TH2), 4 data modeling patterns, 6-section governance, **5 orchestration patterns** (Airflow/dbt+GHA/cron/GitHub Actions/Google Apps Script), storytelling, 8-category suggestion protocol. 1-stop-shop end-to-end DA harness with **proactive capability discovery** — solves the "you don't know what you don't know" gap.
+> Professional Data Analyst + Analytics Engineer workflow as a Claude Code plugin. **9 routable modes**, 14 stdlib scripts, 14 method specs (causal + validation), 4 mandatory rules + **Proactive Suggestion at Mode Exit**, planning protocol (TH1/TH2), 4 data modeling patterns, 6-section governance, **5 orchestration patterns** (Airflow/dbt+GHA/cron/GitHub Actions/Google Apps Script), 5-tier schema-source hierarchy, portable semantic-layer recipe, visualization discipline (SWD), 8-category suggestion protocol. 1-stop-shop end-to-end DA harness with **proactive capability discovery** — solves the "you don't know what you don't know" gap.
 
 ## Install
 
@@ -121,22 +121,43 @@ Sub-agents are spawned only when value > cost. Most work runs in the main agent 
 - **Outline / Story Flow Check** at every review pass (extract headings standalone, verify story is followable)
 - **Sub-agent prompt discipline** (anti-shortcut + handoff drift + fresh-session + context-packet)
 
+## Visualization discipline (v3.3)
+
+Every chart / dashboard / slide goes through a 6-lesson visualization framework + 5-rule cheatsheet + 10 anti-pattern checklist:
+1. **Action title** — chart title states a conclusion, not a topic
+2. **Grey + 1 accent** — neutral grey default; one accent on focal entity
+3. **No pie, no 3D** — horizontal bar > pie; 2D > 3D; slopegraph for 2-point trends
+4. **Clutter checklist** — strip border / heavy gridlines / redundant legend / 3D / shadow / gradient
+5. **Horizontal logic** — page titles read in order form a Setup → Conflict → Resolution story
+
+Full reference: `references/storytelling-with-data.md` (preattentive attributes, Z/F reading patterns, Gestalt principles, pre-ship checklist).
+
+## Schema discovery + semantic layer (v3.3)
+
+5-tier hierarchy for table schema + access discovery: **T0** owner-curated LLM tag → **T1** catalog tool direct API → **T2** access-aware metadata MCPs (per-user access scope + semantic cube + documentation) → **T3** INFORMATION_SCHEMA + brainstorm with user → **T4** sampling. See `references/schema-source-hierarchy.md`.
+
+Portable 6-phase recipe for building a semantic layer from scratch (engine-agnostic — Cube.js / dbt-metrics / LookML / MetricFlow): `references/semantic-layer-setup.md`.
+
 ## Engine-agnostic by design
 
-The skill treats specific engines as replaceable adapters:
+The plugin treats specific engines as replaceable adapters:
 - SQL engine: BQ / Postgres / Snowflake / Redshift / DuckDB
-- Semantic layer: Cube.js / dbt-metrics / MoMo Mimir / LookML
+- Semantic layer: Cube.js / dbt-metrics / LookML / org-specific
 - Notification channel: SMTP / Slack / Teams / PagerDuty / internal module
 - Cron / scheduler: Airflow / Dagster / Prefect / crontab / GitHub Actions / Claude /loop / Claude /schedule
 
 Workspace-specific configuration (project IDs, credentials, brand themes) lives OUTSIDE the plugin — in env vars, config files, or workspace docs.
 
+## Optional org-specific extensions
+
+For users at MoMo: a dedicated reference + example MCP config bundle access to Semantic Cube, momo-data MCP (Semantic Cube + Data Portal + Journey Data + Apollo), mimir MCP (NL→SQL + tag namespace), and OpenMetadata curation. See `references/momo-extensions.md` and `mcp/example-momo-mcp.json`. Non-MoMo users can ignore — the plugin works without them.
+
 ## License
 
 MIT — see `LICENSE`.
 
-## Credits
+## Author
 
-Method by **Loc Tu** (loctu) · 2026. Distilled from a personal practice of MoMo DA work + ~50 feedback memories + TymeX case study + RMIT business stats lecture.
+Method by **Loc Tu** (loctu) · 2026. Distilled from personal practice.
 
 Primary sources cited per method spec (see `references/methods/<name>.md` Reading order section).

@@ -22,7 +22,7 @@ Procedure:
    - [ ] **Step-traceability**: can the reader trace each project step from headings alone?
 4. If ANY question fails → fix is at the STRUCTURE level (heading naming / section order / missing bridge sections), NOT body-patching.
 
-Why this check is mandatory — stakeholder readers skim headings before deciding to read body. Bad outline = bounce even when body excellent. Past incident: TymeX case study draft caught M3 placed mid-sequence with non-self-explanatory heading; fix was rename + reorder, not body rewrite.
+Why this check is mandatory — stakeholder readers skim headings before deciding to read body. Bad outline = bounce even when body excellent. Documented case: a draft caught a milestone section placed mid-sequence with a non-self-explanatory heading; fix was rename + reorder, not body rewrite.
 
 Distinct from neighboring checks:
 - Section A (Orientation) — only the opening block.

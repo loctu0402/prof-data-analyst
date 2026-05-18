@@ -7,7 +7,7 @@
     "After install: restart Claude Code, then verify with: `claude mcp list`",
     "Each entry should report: <name>: <command> - ✓ Connected",
     "",
-    "All 3 MCPs are OPTIONAL — install only the ones your team uses.",
+    "Both MCPs are OPTIONAL — install only the ones your team uses.",
     "Non-MoMo users: ignore this file entirely. The plugin works without these."
   ],
 
@@ -27,7 +27,7 @@
     },
 
     "mimir-da-sql": {
-      "_purpose": "Mimir NL→SQL agent (MoMo-specific). Optional. See references/momo-extensions.md §3a.",
+      "_purpose": "Mimir NL→SQL agent + access-aware schema discovery (get_domain_schema / glob_search). MoMo-specific. See references/momo-extensions.md §3a.",
       "_install_note": "Requires local Mimir client checkout + Python env. Replace <PATH_TO_MIMIR> with your local install path. Ping mimir-team for setup if not available.",
       "type": "stdio",
       "command": "python",
@@ -39,33 +39,20 @@
         "MIMIR_BQ_DATA_PROJECT": "momovn-prod",
         "MIMIR_USER": "<your-email>@mservice.com.vn"
       }
-    },
-
-    "powerbi-modeling": {
-      "_purpose": "PowerBI Desktop model editing via TMDL/PBIP. Optional. Used by mode-report for PBI deliverables.",
-      "_install_note": "Requires VSCode extension 'analysis-services.powerbi-modeling-mcp' installed. Adjust path to match your extension version.",
-      "type": "stdio",
-      "command": "C:\\Users\\<USER>\\.vscode\\extensions\\analysis-services.powerbi-modeling-mcp-<VERSION>\\server\\powerbi-modeling-mcp.exe",
-      "args": [
-        "--start",
-        "--readwrite"
-      ]
     }
   },
 
   "_CLI_install_commands": {
     "_note": "Alternative to manual JSON edit — run these in PowerShell/bash to register MCPs at user scope.",
     "momo-data": "claude mcp add -s user momo-data -- cmd /c npx -y mcp-remote https://mdp-mcp-gateway.mservice.io/servers/<SERVER_ID>/mcp",
-    "mimir-da-sql": "claude mcp add -s user mimir-da-sql -- python <PATH_TO_MIMIR>/mcp_server.py",
-    "powerbi-modeling": "claude mcp add -s user powerbi-modeling -- C:\\path\\to\\powerbi-modeling-mcp.exe --start --readwrite"
+    "mimir-da-sql": "claude mcp add -s user mimir-da-sql -- python <PATH_TO_MIMIR>/mcp_server.py"
   },
 
-  "_verify": "After install: `claude mcp list` should show all 3 as ✓ Connected. If '✗ Failed to connect', check VPN (MoMo internal services need MoMo VPN) and that the server endpoint is reachable from your machine.",
+  "_verify": "After install: `claude mcp list` should show both as ✓ Connected. If '✗ Failed to connect', check VPN (MoMo internal services need MoMo VPN) and that the server endpoint is reachable from your machine.",
 
   "_security_notes": [
     "1. NEVER commit a real SERVER_ID, mimir PATH, or PAT into a public repo.",
     "2. SERVER_ID for momo-data is per-team — get yours from MoMo Data Platform team, do not share across teams.",
-    "3. Mimir + momo-data MCPs require MoMo VPN for endpoint reachability.",
-    "4. powerbi-modeling MCP touches local PBI Desktop files only; no remote auth."
+    "3. Both MCPs require MoMo VPN for endpoint reachability."
   ]
 }

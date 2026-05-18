@@ -12,16 +12,20 @@ Minor release: schema-discovery hierarchy + portable semantic-layer recipe + MoM
 - **`references/schema-source-hierarchy.md`** — 5-tier ladder restructured so access-aware MCPs sit ABOVE raw INFORMATION_SCHEMA: T0 owner-curated LLM tag → T1 catalog DIRECT API → T2 access-aware metadata MCPs (mimir MCP `get_domain_schema` + momo-data MCP semantic cube + data portal docs; per-user-access-filtered) → T3 INFORMATION_SCHEMA + brainstorm step-by-step with user (the human domain expert) → T4 sampling. Decision tree, per-tier rationale, audit-vs-trust matrix. Engine-agnostic with MoMo tools as concrete examples. Rationale for T2 placement: catalog API and INFORMATION_SCHEMA both fail the same way — show what org HAS, not what YOU can use. Access-aware MCPs bridge that gap.
 - **`references/semantic-layer-setup.md`** — Portable 6-phase recipe (Discovery → Architecture → Foundation cube template → Layered modeling → Pre-aggregation → Delivery+Governance → Operate). Works for Cube.js / dbt-metrics / LookML / MetricFlow. Derived from MoMo Semantic Cube reference §9 but de-MoMo-ized for portability.
 - **`references/momo-extensions.md`** — MoMo-specific wrapper documenting all 5 entry points: Semantic Cube (Synmetrix + Cube.js), momo-data MCP gateway (semantic-/data-portal-/journey-data-/apollo- tool groups), Mimir as NL→SQL MCP + Mimir tag namespace, OpenMetadata API+PAT 5-phase curation playbook, and consolidated schema-source preference for MoMo work.
-- **`mcp/example-momo-mcp.json`** — Drop-in MCP server config snippet for `~/.claude.json` user scope. Covers momo-data + mimir-da-sql + powerbi-modeling. CLI install commands included. Optional for non-MoMo users.
+- **`mcp/example-momo-mcp.json`** — Drop-in MCP server config snippet for `~/.claude.json` user scope. Covers momo-data + mimir-da-sql. CLI install commands included. Optional for non-MoMo users.
+- **`references/storytelling-with-data.md`** — Visualization discipline reference: 6 SWD lessons (Context / Visual / Clutter / Focus / Designer / Story) + 5-rule cheatsheet (action title, grey + 1 accent, no pie / no 3D, clutter checklist, horizontal logic) + preattentive attribute cookbook + Z-pattern + Gestalt application + 10 anti-patterns + 60-sec pre-ship checklist (per-chart and per-deck).
 
 ### Changed
 - **`references/mode-query.md` Step 2** — Refactored "semantic-first" discovery into 5-tier schema-source hierarchy with cross-reference to new `schema-source-hierarchy.md` + `momo-extensions.md`. Same behavior, more discoverable, now harmonized with the new references.
-- **`SKILL.md` "Where to Read Next"** — Added 2 new sections: "Schema discovery + semantic layer (v3.3 — new)" pointing to schema-source-hierarchy + semantic-layer-setup; "MoMo stakeholder extensions (v3.3 — new, opt-in)" pointing to momo-extensions + mcp config example.
+- **`references/mode-report.md` Step 5** — Hooked SWD discipline into body-population step: every chart now follows action title + grey + 1 accent + clutter checklist + horizontal logic, with link to full reference.
+- **`references/style-rules.md`** — Added "Visualization discipline (Storytelling with Data)" section above Chart Anatomy 7-element. Cheatsheet 5 rules inline + pointer to full reference.
+- **`SKILL.md` "Where to Read Next"** — Added 3 new pointers: schema-source-hierarchy + semantic-layer-setup (Schema discovery + semantic layer); momo-extensions + mcp config (MoMo stakeholder extensions, opt-in); storytelling-with-data (Narrative + structure section).
+- **`README.md`** — Bumped to v3.3; added Visualization discipline section + Schema discovery + semantic layer section + Optional org-specific extensions section. Author block streamlined.
 
 ### Why
-Loc (MoMo DA, plugin author) needed the plugin to be a complete harness for MoMo stakeholders without leaking MoMo-specific tooling into the portable core. Solution: portable recipes (semantic-layer-setup, schema-source-hierarchy) in main references; org-specific tooling (Semantic Cube + 3 MCPs + Mimir tag + OpenMetadata) consolidated into one opt-in file (momo-extensions.md). MoMo users get full integration; non-MoMo users see one extra reference file they can ignore.
+Plugin needed (a) a complete schema-discovery flow that goes from owner-curated catalog hints → access-aware metadata MCPs → engine-native fallback, not just "semantic-first"; (b) a portable semantic-layer recipe usable for any org's Cube.js / dbt-metrics / LookML setup; (c) one opt-in org-specific extension file so MoMo stakeholders get a full harness without leaking org tooling into the portable core; (d) explicit visualization discipline so analytical rigor translates to readable deliverables.
 
-Field trigger: 2026-05-16 Semantic Cube docs crawl produced 833-line reference at `notes/loctu-pkm/1-notes/semantic-cube-reference.md`. Loc asked to "apply ngay vào project" → this release codifies the recipe + bakes the MCP integration so future sessions can route stakeholder questions through the right tier without re-deriving the workflow.
+T2 placement rationale: T1 catalog API and T3 INFORMATION_SCHEMA both fail the same way — they show what the org HAS, not what YOU can use. Access-aware MCPs bridge that gap, plus bundle multiple metadata sources (catalog + semantic cube + documentation) in one user-scoped interface.
 
 ## [3.2.2] — 2026-05-15
 
@@ -125,7 +129,7 @@ Additive release: front-of-workflow planning + data engineering hooks + brief-ti
 
 ## [3.0.0] — 2026-05-14
 
-First plugin-format release. Consolidates ~50 personal DA feedback memories + lessons from `momo-agentic-platform` + TymeX case study + MoMo TTT pipeline into a portable, distributable Claude Code plugin.
+First plugin-format release. Consolidates accumulated personal DA practice + feedback memories into a portable, distributable Claude Code plugin.
 
 ### Added
 - Plugin manifest at `.claude-plugin/plugin.json` + marketplace entry at `.claude-plugin/marketplace.json`
