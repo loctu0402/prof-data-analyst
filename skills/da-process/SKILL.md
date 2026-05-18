@@ -1,11 +1,11 @@
 ---
 name: da-process
-description: Raw → staged → cleaned → mart → ML-ready pipeline. Layered tables (stg_/clean_/mart_/ml_/pred_) per Medallion + dbt-style. DuckDB-first for case studies. 7-check + 6-step EDA + Executive Summary per phase. Triggers on "process data", "ML case study", "EDA notebook", "feature engineering", "DWH", or /da-process.
+description: Raw → staged → cleaned → mart → ML-ready pipeline + standalone Data Quality Audit + standalone Cleaning. Layered tables (stg_/clean_/mart_/ml_/pred_) per Medallion + dbt-style. DuckDB-first for case studies. 7-check + 6-step EDA + Executive Summary per phase. Triggers on "process data", "ML case study", "EDA notebook", "feature engineering", "DWH", "data audit", "data quality", "quality check", "kiểm tra data", "clean data", "data cleaning", or /da-process.
 ---
 
 # DA Process Mode
 
-Transformation engine from raw input through staged → cleaned → mart → analysis/ML-ready output.
+Transformation engine from raw input through staged → cleaned → mart → analysis/ML-ready output. Also covers standalone Data Quality Audit (Phase 2 only — output is a quality report) and standalone Cleaning (Phase 2 + Phase 3 — output is one cleaned table).
 
 ## 4 Universal Rules
 1. Orientation Block at top of every deliverable

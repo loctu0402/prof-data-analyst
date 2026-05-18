@@ -1,8 +1,20 @@
-# Mode — Process (Raw Data → Analysis / ML-Ready)
+# Mode — Process (Raw Data → Analysis / ML-Ready) + Quality Audit + Cleaning
 
-Invoke when user asks: "process data", "build mart", "feature engineering", "EDA notebook", "data pipeline", "raw → clean", "DWH layer", "/da-process".
+Invoke when user asks: "process data", "build mart", "feature engineering", "EDA notebook", "data pipeline", "raw → clean", "DWH layer", "data audit", "data quality", "quality check", "kiểm tra data", "clean data", "data cleaning", "/da-process".
 
 This mode covers the **transformation engine** from raw input through staged → cleaned → mart → analysis/ML-ready output. Sits between `mode-query` (fetch) and `mode-insight` (hypothesis-driven analysis) or `mode-report` (stakeholder delivery).
+
+## Standalone-entry sub-modes (no full ML pipeline needed)
+
+The mode supports 3 entry granularities. Pick by user intent:
+
+| Entry | Use when | Run only |
+|-------|----------|----------|
+| **Full pipeline** (M1-M5 / Bronze→Silver→Gold) | Building a new analytical / ML dataset from raw | All phases |
+| **Quality Audit only** | Auditing an existing mart / table to decide "is this trustworthy enough to use?" | Phase 2 (6-step EDA: dtype / univariate / anomaly / bivariate / ranking / patterns) — output a quality report, do NOT write cleaning artifacts |
+| **Cleaning only** | Source data is dirty, you need a clean output but no feature engineering / mart build | Phase 2 (audit findings) + Phase 3 (cleaning ops: dedup / null fill / type cast / outlier handling) — output one cleaned table |
+
+For pure governance-policy work (access controls / data contracts / freshness SLA setup), see `references/governance.md` — that's a reference, not a session workflow.
 
 ## Overview — Why Process Mode Exists
 

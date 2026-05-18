@@ -116,6 +116,60 @@ When pipeline uses 2 caches with same prefix but different scope (e.g., `events_
 - Report bytes / cost estimate to user BEFORE running
 - Prefer monthly-aggregate marts over daily marts when answer is monthly (often 10-30× cheaper)
 
+## Backfill Workflow (recompute historical data safely)
+
+A backfill recomputes past N days / months of cached data. Common triggers: bug fix in transformation logic, schema column added with default backfill, upstream mart got refreshed, expanding analysis window.
+
+### Decision tree before any backfill
+
+```
+1. Why backfill?
+   ├─ Bug fix in transform → backfill scope = affected date range only (not all-history)
+   ├─ New column added → backfill scope = column NULL for historical rows? full table needed?
+   ├─ Upstream refreshed → backfill scope = upstream date range only
+   └─ Expanding window → backfill scope = newly-added date range only
+
+2. Dry-run cost estimate
+   ├─ < $1 → proceed
+   ├─ $1-10 → surface estimate, user confirm
+   ├─ $10-100 → user confirm + plan execution window (off-peak)
+   └─ > $100 → STOP. Surface alternative (monthly mart? partition subset? sampling?)
+
+3. Idempotency check
+   ├─ Cache write is INSERT OVERWRITE / MERGE / upsert? → safe to re-run
+   ├─ Cache write is plain INSERT? → MUST delete target range first
+   └─ No idempotency guarantee? → STOP. Add idempotency before backfill.
+
+4. Lower-bound preservation
+   ├─ Incremental cache mode → MUST NOT clip the lower bound (silently wipes earlier history)
+   ├─ Use --backfill-from <date> flag (or equivalent) explicitly
+   └─ Validate after run: row count of historical range matches expected
+
+5. Cross-validation post-backfill
+   ├─ Spot-check 5 rows from middle of backfilled range vs source-of-truth (BQ direct)
+   ├─ Check row count: GROUP BY date HAVING COUNT(*) > 1 → 0 dups expected
+   └─ Compare aggregate (SUM / COUNT) of backfilled range vs canonical
+```
+
+### Backfill execution patterns
+
+| Pattern | When | Risk |
+|---------|------|------|
+| **`--backfill-from <date>`** | Default; clean re-run of date range | Low if idempotent write |
+| **Chunked backfill** (1 month at a time) | Backfill > 6 months on billed engine; want progress visibility + fail-recovery | Low; preferred for large ranges |
+| **Shadow backfill** | Critical mart with active consumers; bug fix that changes historical numbers | Medium — write to `<table>_v2`, validate, atomic swap |
+| **Full rebuild** | Schema change makes historical computation invalid; logic too different to patch | High — last-resort; requires explicit user OK + downtime window |
+
+### Anti-patterns
+
+| Anti-pattern | Symptom | Fix |
+|--------------|---------|-----|
+| Backfill without dry-run on billed engine | Cost surprise; quota exceeded mid-run | Always dry-run first; report bytes to user |
+| Plain INSERT backfill on non-idempotent table | Duplicate rows everywhere | Switch to INSERT OVERWRITE / MERGE; delete target range first if needed |
+| Backfill that silently clips lower bound | Historical history disappears | `--backfill-from <date>` flag; never let incremental mode auto-trim |
+| Backfill without cross-validation | Bug fix introduced new bug; downstream reports wrong number | Spot-check 5 rows + compare aggregates post-run |
+| Backfill during peak hours on shared cluster | Affects other team's pipelines | Schedule off-peak; coordinate with platform team if > $10 cost |
+
 ## Pipeline Versioning
 
 Keep pipeline as `pipeline.py` (canonical). For experimental changes:

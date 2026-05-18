@@ -16,10 +16,16 @@ Minor release: schema-discovery hierarchy + portable semantic-layer recipe + vis
 - **`mcp/example-momo-mcp.json`** — Drop-in MCP server config snippet for `~/.claude.json` user scope (momo-data + mimir-da-sql). CLI install commands included.
 
 ### Changed
+- **`references/mode-query.md` Step 0 — Request Intake** (NEW) — Pre-flight phase BEFORE schema discovery. Restate question + surface implicit choices (grain / cohort / aggregation / dedup / window / comparison / breakdown) + propose calculation logic in plain language + suggest 1-2 extensions + user-confirm gate. Documents skip conditions (explicit SQL provided, repeat query, pipeline-internal, fully-atomic ask). Encodes the senior-DA pattern of "structure the question before structuring the answer".
 - **`references/mode-query.md` Step 2** — Discovery refactored to 5-tier schema-source hierarchy with cross-reference to new references.
 - **`references/mode-report.md` Step 5** — Hooked SWD discipline into body-population: every chart follows action title + grey + 1 accent + clutter checklist + horizontal logic.
 - **`references/style-rules.md`** — Added "Visualization discipline (Storytelling with Data)" callout above Chart Anatomy section. 5-rule cheatsheet inline + pointer to full reference.
-- **`SKILL.md` "Where to Read Next"** — Added pointers to schema-source-hierarchy, semantic-layer-setup, momo-extensions, storytelling-with-data.
+- **`references/mode-process.md`** — Documented 3 entry granularities: Full pipeline / Quality Audit only / Cleaning only. Trigger phrases expanded to cover "data audit", "data quality", "quality check", "kiểm tra data", "clean data", "data cleaning". Process mode is now the standard discoverable entry for standalone data quality work.
+- **`references/mode-frame.md`** — Added "Mid-stream Gate 2 standalone" sub-mode. Allows running Gate 2 (Metric Define) alone when project context already exists and only the metric question needs resolving, without forcing a full 4-gate Frame run.
+- **`references/mode-model.md`** — Added "Schema Evolution" section. 9-row safe-migration recipe (add column / rename / drop / split / merge / type change / grain change / partition-key change) with 7 discipline rules + 4 anti-patterns.
+- **`references/mode-automation.md`** — Added "Backfill Workflow" section. Decision tree (why → cost → idempotency → lower-bound preservation → cross-validation), 4 execution patterns (`--backfill-from` / chunked / shadow / full rebuild) + 5 anti-patterns.
+- **`SKILL.md` "Where to Read Next" + mode router** — Added pointers to schema-source-hierarchy, semantic-layer-setup, momo-extensions, storytelling-with-data. Process mode router row updated with data quality trigger phrases.
+- **`commands/da-process.md`** — Updated to surface 3 entry granularities at command-invocation time.
 - **`README.md`** — Bumped to v3.3; added Visualization discipline section + Schema discovery + semantic layer section + Optional org-specific extensions section.
 
 ## [3.2.2] — 2026-05-15

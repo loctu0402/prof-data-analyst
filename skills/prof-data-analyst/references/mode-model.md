@@ -198,6 +198,43 @@ After modeling, route to `governance.md` for:
 
 Modeling pattern + governance setup go together. Don't ship model without governance plan.
 
+## Schema Evolution — Safely Changing an Existing Model
+
+Once a model is in production, every schema change risks breaking downstream consumers (dashboards / reports / pipelines / ML). The pattern below is the safe-migration recipe used in dbt / Airflow / production DWH workflows.
+
+### Common evolution operations + safe pattern
+
+| Operation | Risk | Safe-migration recipe |
+|-----------|------|----------------------|
+| **Add column (new feature, optional)** | Low | Add column with default NULL → backfill in single batch → no downstream change needed. Doc the column in Table Contract same commit. |
+| **Add column (mandatory NOT NULL)** | Medium | (1) Add as nullable + backfill; (2) Verify backfill complete; (3) Switch to NOT NULL in a separate commit. Never NOT NULL + add in one step. |
+| **Rename column** | High | Phase 1: add new column, populate from old in same row. Phase 2: dual-write (any pipeline updating old column ALSO updates new). Phase 3: migrate consumers to new column (grep all SQL / dashboards). Phase 4: drop old column. Span: ≥ 2 weeks; never single-commit. |
+| **Drop column (deprecate)** | High | (1) Mark deprecated in Table Contract + add `_deprecated_YYYYMMDD` suffix; (2) Grep all downstream consumers; (3) Notify each consumer owner + give 30-day deadline; (4) Drop after all consumers migrated. |
+| **Split column (1 col → N cols)** | High | Same pattern as Rename × N. Add N new columns, dual-populate, migrate consumers, drop old. |
+| **Merge columns (N cols → 1)** | High | Add merged column, populate from N source columns in same row, migrate consumers, drop N old. |
+| **Change column type** | High | Add new-type column with new name (e.g. `amount_v2`), populate via cast, validate, migrate consumers, drop old, rename new → original name. |
+| **Change grain (e.g. user-day → user-event)** | Critical | NOT an in-place change. Create new table with new grain. Run both in parallel. Migrate consumers one-by-one. Deprecate old after all migrated. Span: months. |
+| **Reorder partition key** | Critical | Same as change grain — new table, parallel run, migrate, deprecate. Partition-key change is structurally incompatible with in-place edit. |
+
+### Safe-migration discipline (applies to all High / Critical ops)
+
+1. **Write the migration plan in the Table Contract** before any SQL change. The contract update is the trigger.
+2. **Grep all downstream consumers** before announcing the migration. List them in the plan.
+3. **Dual-write window ≥ 2 weeks** for renames / type changes. Consumers verify the new column matches the old before the cutover.
+4. **Backfill before NOT NULL** — never enforce a constraint until 100% of historical rows satisfy it.
+5. **Versioned column suffixes** (`amount_v2`) during dual-write windows so consumers can opt in incrementally.
+6. **Deprecation notice** = explicit owner ping + 30-day deadline + grep proof of zero remaining usage before drop.
+7. **Rollback plan** documented BEFORE migration: "if step 3 fails, what's the revert?" Critical for partition-key / grain changes.
+
+### Anti-patterns specific to schema evolution
+
+| Anti-pattern | Symptom | Fix |
+|--------------|---------|-----|
+| Single-commit rename | Downstream pipelines break Monday morning | Phase the rename across 4 commits over ≥ 2 weeks |
+| Drop without grep | Dashboard breaks 6 days later because someone was reading the dropped column | Grep all SQL + dashboards + ML features BEFORE the drop |
+| In-place grain change | Aggregations from yesterday no longer match aggregations from today | Grain change = new table, never in-place |
+| Skipping Table Contract update | Schema changes; docs lie; next person trusts docs and writes wrong SQL | Contract update is part of the migration PR, not a follow-up |
+
 ## Anti-patterns
 
 | Anti-pattern | Symptom | Fix |

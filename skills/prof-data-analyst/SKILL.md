@@ -51,7 +51,7 @@ Modes follow the standard DA flow: **Frame → Model → Query → Process → I
 | **frame** | "frame project", "kickoff", "metric define", "scope project", "không biết bắt đầu", "/da-frame" | `references/mode-frame.md` |
 | **model** | "data modeling", "build pipeline mới", "design DWH", "setup mart", "dbt project", "/da-model" | `references/mode-model.md` |
 | **query** | "viết SQL", "query data", "lấy data", "NL→SQL", "/da-query" | `references/mode-query.md` |
-| **process** | "process data", "ML case study", "M1 / M2 / M3", "feature engineering", "EDA notebook", "DWH", "/da-process" | `references/mode-process.md` |
+| **process** | "process data", "ML case study", "M1 / M2 / M3", "feature engineering", "EDA notebook", "DWH", "data audit", "data quality", "quality check", "kiểm tra data", "clean data", "data cleaning", "/da-process" | `references/mode-process.md` (Phase 2 — Quality Audit + Phase 3 — Cleaning are the standalone-discoverable parts) |
 | **insight** | "phân tích insight", "hypothesis validation", "diagnostic", "why X", "/da-insight" | `references/mode-insight.md` |
 | **automation** | "automation", "pipeline tự động", "schedule job", "/da-automate" | `references/mode-automation.md` |
 | **report** | "build báo cáo", "làm report", "stakeholder report", "/da-report" | `references/mode-report.md` |

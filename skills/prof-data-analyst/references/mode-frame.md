@@ -20,6 +20,24 @@ The 7 original modes (query / process / insight / automate / report / review / f
 
 Skip Frame mode when: planning doc already exists + stakeholder has clear ask + data plan is set → jump to `da-query` or `da-process`.
 
+## Mid-stream Gate 2 standalone (metric question only, no full project frame)
+
+Common case: analysis already in flight, but mid-stream the user (or stakeholder) asks "which metric / dimension / framework fits here?". A full 4-gate Frame run is overkill.
+
+Run **Gate 2 only** in this case:
+
+1. Read existing project context if any (`PLANNING.md`, prior session notes, current deliverable draft). Do NOT re-frame the business question — assume it's already set.
+2. Run Gate 2 (Metric Define) as a standalone protocol:
+   - Identify the decision the metric must inform (1 sentence)
+   - Pick framework from `metric-framework.md` decision table (NSM / OMTM / Growth Loop / HEART / AARRR / Diagnostic / Counter-metric / Unit Economics) — match framework to question type
+   - Fill the 10-field metric contract (name / formula / grain / unit / cohort / window / baseline / threshold / owner / refresh)
+   - Apply Section 0 KPI Stress Test: 5-criterion must-pass (tied to business goal / influences decisions / drives action / clear owner / tracked consistently)
+3. Output: append the metric contract to the existing PLANNING.md (or write a `METRIC.md` if no planning doc exists). Skip Gates 1 / 3 / 4.
+
+Total time: 15-25 min vs 1.5-3 hrs for the full frame.
+
+Trigger phrases for this sub-mode: "metric nào phù hợp", "dimension nào nên dùng", "đo cái gì cho đúng", "stress test metric này", "mid-stream metric question".
+
 ## Four Gates (workflow)
 
 This mode runs the 4-gate Planning Protocol (full detail: `planning-protocol.md`):

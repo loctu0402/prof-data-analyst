@@ -16,6 +16,89 @@ RECALL → EXPLORE → LEARN  (repeat until question answered)
 
 The more you explore, the better future runs get. This pattern is engine-independent.
 
+## Step 0 — Request Intake (BEFORE schema discovery)
+
+The most common failure mode of NL→SQL is jumping into SQL before confirming what the requester actually wants. A senior DA always intakes the request first. The mode encodes that intake as Step 0; only proceed to Step 1 once the user (the requester or the analyst representing them) confirms.
+
+### 0.1 — Restate the question
+
+In ONE sentence, paraphrase what the user asked. Surface the implicit subject + action + time window.
+
+Example:
+- User: "cho xem cashin tháng 4"
+- Restate: "You want the total cashin volume for April 2026, presented as one figure."
+
+If the restatement doesn't match what the user meant, they will correct here — cheap. SQL rewrite later is expensive.
+
+### 0.2 — Surface implicit choices
+
+A real request always leaves 2-5 choices unspecified. List them as a short menu, default each one, and ask for confirmation or correction.
+
+Common implicit choices to surface:
+
+| Dimension | Why ask | Example options |
+|-----------|---------|-----------------|
+| **Grain** | Same metric at daily / weekly / monthly looks different | Daily / Weekly / Monthly / Single rollup |
+| **Cohort filter** | Total includes test accounts / bots / internal | All / exclude internal / exclude bots / a specific tier |
+| **Aggregation** | Sum / count / count-distinct / avg / median produce different stories | Sum amount / count events / count distinct users / median per user |
+| **Dedup rule** | Same event logged twice → silent inflation | Dedupe by event_id / by (user, timestamp) / no dedup needed |
+| **Time window** | "Tháng 4" = Apr only, vs. up-to-Apr, vs. last-30-days | Calendar month / rolling 30d / since launch |
+| **Comparison** | A single number is noise; vs prior period is signal | DoD / WoW / MoM / YoY / vs plan / no comparison |
+| **Breakdown** | Headline number alone vs by dimension | None / by region / by tier / by channel |
+
+Pick reasonable defaults; don't ask all 7 every time. Surface the 2-4 that matter for THIS question.
+
+### 0.3 — Propose calculation logic in plain language
+
+Before writing any SQL, state the calculation as a one-paragraph English sentence. Example:
+
+> "Logic: SUM of `cashin_amount` from the daily user mart, filtered to `date BETWEEN '2026-04-01' AND '2026-04-30'`, excluding internal accounts. Grouped by date for the DoD series, then aggregated to one figure for the headline. Expected output: 1 headline number + 30-row daily series."
+
+The user can spot a logic mismatch in 10 seconds reading the paragraph; they'd need 2 minutes to spot the same mismatch reading the SQL.
+
+### 0.4 — Suggest 1-2 extensions
+
+A senior DA proposes extensions the requester didn't ask for but probably wants. Pick the 1-2 highest-leverage ones, never more (avoid scope creep).
+
+Common high-leverage extensions:
+- Sibling metric ("you asked for cashin; would cashout same period be useful for net flow?")
+- DoD / 7d-avg comparison if the request asked for a single number
+- Top-K breakdown ("top 10 days / users / tiers driving the total?")
+- Quality caveat ("data is T-1, last value might be partial — flag in output?")
+
+Frame extensions as "want me to also...?" — opt-in, not assumed.
+
+### 0.5 — User confirms → proceed to Step 1
+
+The user picks from the menu, OR corrects the restatement, OR rejects extensions. Once they confirm, proceed to Step 1 (engine identification) and beyond.
+
+Pattern for confirmation:
+```
+[restate question]
+[implicit-choices menu with defaults marked]
+[proposed logic paragraph]
+[1-2 extension proposals]
+
+→ Confirm / correct / extend?
+```
+
+Cost: ~30 seconds of pre-flight. Saves 2-3 SQL rewrites + stakeholder back-and-forth when intent was misread.
+
+### When to skip Step 0
+
+| Situation | Action |
+|-----------|--------|
+| User pasted explicit SQL and asks to optimize / explain / validate | Skip Step 0; jump to Step 3 self-correction |
+| Request is repeat of a query run earlier in the session with same parameters | Skip Step 0; jump to cache verify (Step 5) |
+| Request is one of N atomic queries in an automated pipeline | Skip Step 0; the pipeline is the intake; proceed to Step 1 |
+| Request has zero implicit choices (truly atomic: "what's the row count of table X?") | Skip Step 0; jump to Step 1 |
+
+Default: DO run Step 0 unless one of the skip conditions clearly applies.
+
+### Why this step exists (Operational)
+
+Real-world DA failure mode: stakeholder DMs a one-line ask, analyst writes SQL based on what they ASSUME, runs it, ships number. Two days later stakeholder says "that's not what I wanted." The fix isn't to write better SQL — it's to confirm intent before writing any SQL. Step 0 enforces that handshake. Consulting playbook calls this "structuring the question before structuring the answer."
+
 ## Step 1 — Identify the Engine + Access Layer
 
 Ask once at the start of a session:
